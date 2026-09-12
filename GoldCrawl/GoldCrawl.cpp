@@ -11,9 +11,8 @@
 #define HEIGHT 144
 #define SCALE 4
 
-static bool tick(Director& director, Renderer& renderer)
+static bool tick(Director& director, Input& input, Renderer& renderer)
 {
-	auto& input = Input::only();
 	if (input.update() == InputUpdateResults::Quit)
 	{
 		return false; // quit
@@ -22,7 +21,7 @@ static bool tick(Director& director, Renderer& renderer)
 	renderer.clear();
 
 	director.update();
-	director.handleInput();
+	director.handleInput(input);
 	director.render(renderer);
 
 	return true;
@@ -38,6 +37,7 @@ int main(int argc, char* args[])
 		// out of scope
 		bacon::SDLContext ctx;
 		Director director;
+		Input input;
 		Renderer renderer(TITLE, WIDTH, HEIGHT, SCALE);
 
 		// for when we build for web using emscripten, which doesn't like infinite loops
@@ -46,7 +46,7 @@ int main(int argc, char* args[])
 		while (1)
 		{
 			// game loop
-			if (!tick(director, renderer)) break;
+			if (!tick(director, input, renderer)) break;
 		}
 #endif
 

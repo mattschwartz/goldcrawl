@@ -5,7 +5,7 @@ void Director::update()
 	// tick the game
 }
 
-void Director::handleInput()
+void Director::handleInput(Input& input)
 {
 	// todo - process input in scene
 }

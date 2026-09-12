@@ -1,11 +1,5 @@
 #include "Input.h"
 
-Input& Input::only()
-{
-    static Input input;
-    return input;
-}
-
 Input::Input()
 {
     initKeybindings();
@@ -56,7 +50,20 @@ InputUpdateResults Input::update()
 
     if (gamepad)
     {
-        // process gamepad bindings
+        // process gamepad bindings to tell pressed vs down
+        for (auto& [binding, buttons] : gamepadBindings)
+        {
+            previousGamepadState[binding] = currentGamepadState[binding];
+            bool isDown = false;
+            for (auto& btn : buttons)
+            {
+                if (SDL_GameControllerGetButton(gamepad, btn))
+                {
+                    isDown = true;
+                }
+            }
+            currentGamepadState[binding] = isDown;
+        }
     }
 
     SDL_Event event;
@@ -73,10 +80,48 @@ InputUpdateResults Input::update()
 
 bool Input::isBindingDown(KeyBinding binding) const
 {
-    for (auto& scanCode : keyboardBindings.at(binding))
+    if (auto it = keyboardBindings.find(binding); it != keyboardBindings.end())
     {
-        if (currentKeyboardState[scanCode]) return true;
+        for (auto& scanCode : it->second)
+        {
+            if (currentKeyboardState[scanCode]) return true;
+        }
     }
+
+    if (gamepad)
+    {
+        if (auto it = gamepadBindings.find(binding); it != gamepadBindings.end())
+        {
+            for (auto& button : it->second)
+            {
+                if (SDL_GameControllerGetButton(gamepad, button)) return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+bool Input::isBindingPressed(KeyBinding binding) const
+{
+    if (auto it = keyboardBindings.find(binding); it != keyboardBindings.end())
+    {
+        for (auto& scanCode : it->second)
+        {
+            if (currentKeyboardState[scanCode] && !previousKeyboardState[scanCode]) return true;
+        }
+    }
+
+    if (gamepad)
+    {
+        auto prev = previousGamepadState.find(binding);
+        auto cur = currentGamepadState.find(binding);
+        if (prev != previousGamepadState.end() && cur != currentGamepadState.end() && !prev->second && cur->second)
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 
