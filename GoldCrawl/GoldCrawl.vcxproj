@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)dependencies\sdl\SDL2-2.28.2\include;$(ProjectDir)dependencies\sdl\SDL2_ttf-2.22.0\include;$(ProjectDir)dependencies\sdl\SDL2_image-2.6.3\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)dependencies\sdl\SDL2-2.28.2\include;$(ProjectDir)dependencies\sdl\SDL2_ttf-2.22.0\include;$(ProjectDir)dependencies\sdl\SDL2_image-2.6.3\include;$(ProjectDir)dependencies\json\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)dependencies\sdl\SDL2_image-2.6.3\lib\x64;$(ProjectDir)dependencies\sdl\SDL2_ttf-2.22.0\lib\x64;$(ProjectDir)dependencies\sdl\SDL2-2.28.2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)dependencies\sdl\SDL2-2.28.2\include;$(ProjectDir)dependencies\sdl\SDL2_ttf-2.22.0\include;$(ProjectDir)dependencies\sdl\SDL2_image-2.6.3\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)dependencies\sdl\SDL2-2.28.2\include;$(ProjectDir)dependencies\sdl\SDL2_ttf-2.22.0\include;$(ProjectDir)dependencies\sdl\SDL2_image-2.6.3\include;$(ProjectDir)dependencies\json\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)dependencies\sdl\SDL2_image-2.6.3\lib\x64;$(ProjectDir)dependencies\sdl\SDL2_ttf-2.22.0\lib\x64;$(ProjectDir)dependencies\sdl\SDL2-2.28.2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
