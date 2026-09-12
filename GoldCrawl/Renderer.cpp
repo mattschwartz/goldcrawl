@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include <format>
+#include <SDL_image.h>
 #include "SDLContext.h"
 #include "FileSystem.h"
 
@@ -19,7 +20,6 @@ Renderer::Renderer(const std::string& title, const int width, const int height, 
 	SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
 	SDL_RenderSetLogicalSize(_renderer, width, height);
 	SDL_SetWindowMinimumSize(_window, width * scale, height * scale);
-
 	
 	std::string fontFilepath = bacon::fs::resolve("BaconSans.ttf");
 	auto font = TTF_OpenFont(fontFilepath.c_str(), FONT_SIZE);
@@ -34,6 +34,7 @@ Renderer::Renderer(const std::string& title, const int width, const int height, 
 
 Renderer::~Renderer()
 {
+	// todo - clear cache
 	SDL_DestroyWindow(_window);
 }
 
@@ -47,17 +48,62 @@ void Renderer::render() const
 	SDL_RenderPresent(_renderer);
 }
 
+void Renderer::drawBox(SDL_Rect bounds, SDL_Color color, bool isFill) const
+{
+	SDL_SetRenderDrawColor(_renderer, color.r, color.g, color.b, color.a);
+	if (isFill)
+	{
+		SDL_RenderFillRect(_renderer, &bounds);
+	}
+	else
+	{
+		SDL_RenderDrawRect(_renderer, &bounds);
+	}
+	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
+}
+
+void Renderer::drawSprite(const std::string& sprite, SDL_Rect bounds) const
+{
+	std::string cacheKey = sprite;
+
+	SDL_Texture* texture = nullptr;
+
+	if (auto it = textureCache.find(cacheKey); it != textureCache.end())
+	{
+		texture = it->second;
+	}
+	else
+	{
+		SDL_Surface* srf = IMG_Load(sprite.c_str());
+		texture = SDL_CreateTextureFromSurface(_renderer, srf);
+		SDL_FreeSurface(srf);
+		textureCache[cacheKey] = texture;
+	}
+
+	SDL_RenderCopy(_renderer, texture, NULL, &bounds);
+}
+
 void Renderer::drawText(const std::string& text, int x, int y, SDL_Color color) const
 {
-	// todo - add cache
-	SDL_Surface* srf = TTF_RenderUTF8_Solid(font, text.c_str(), color);
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(_renderer, srf);
-	SDL_FreeSurface(srf);
+	std::string cacheKey = std::format("{}.{}.{}.{}.{}", color.r, color.g, color.b, color.a, text);
+
+	SDL_Texture* texture = nullptr;
+
+	if (auto it = textureCache.find(cacheKey); it != textureCache.end())
+	{
+		texture = it->second;
+	}
+	else
+	{
+		SDL_Surface* srf = TTF_RenderUTF8_Solid(font, text.c_str(), color);
+		texture = SDL_CreateTextureFromSurface(_renderer, srf);
+		SDL_FreeSurface(srf);
+		textureCache[cacheKey] = texture;
+	}
 
 	int texW, texH;
 	SDL_QueryTexture(texture, nullptr, nullptr, &texW, &texH);
 	SDL_Rect textureRect{ x, y, texW, texH };
-
 	SDL_RenderCopy(_renderer, texture, NULL, &textureRect);
 }
 
