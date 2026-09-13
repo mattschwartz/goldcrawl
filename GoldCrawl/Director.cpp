@@ -1,20 +1,27 @@
 #include "Director.h"
 
+Director::Director(std::unique_ptr<Scene> startingScene) : 
+	scene(std::move(startingScene)),
+	lastTicks(SDL_GetTicks64())
+{
+}
+
 void Director::update()
 {
-	// tick the game
+	Uint64 now = SDL_GetTicks64();
+	Uint64 delta = now - lastTicks;
+	lastTicks = now;
+
+	scene->update(delta);
 }
 
 void Director::handleInput(Input& input)
 {
-	// todo - process input in scene
+	scene->handleInput(input);
 }
 
 void Director::render(const Renderer& renderer)
 {
-	renderer.drawSprite("Sprites/charlie.png", { 30,30, 16, 16 });
-	renderer.drawBox({ 0,0,15,15 }, { 255,0,0,255 });
-	renderer.drawText("Hello world", 0, 0, { 255,255,255,255 });
-	// todo - invoke render on scene
+	scene->render(renderer);
 	renderer.render();
 }

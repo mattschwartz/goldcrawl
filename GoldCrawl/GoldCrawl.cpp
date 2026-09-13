@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "Director.h"
 #include "Input.h"
+#include "WorldScene.h"
 
 #define TITLE "Gold Crawl"
 // Rule: gameboy base resolution, we'll scale up in post
@@ -36,7 +37,7 @@ int main(int argc, char* args[])
 		// its destructor forces cleanup automatically when it falls
 		// out of scope
 		bacon::SDLContext ctx;
-		Director director;
+		Director director(std::make_unique<WorldScene>()); // WorldScene starting scene
 		Input input;
 		Renderer renderer(TITLE, WIDTH, HEIGHT, SCALE);
 

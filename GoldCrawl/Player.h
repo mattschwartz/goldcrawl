@@ -1,0 +1,18 @@
+#pragma once
+
+#include "Prelude.h"
+#include "Vector.h"
+
+class Player
+{
+public:
+	Vector getDirection() const { return direction; }
+	void setDirection(Vector direction) { this->direction = direction; }
+
+	Vector getPosition() const { return position; }
+	void setPosition(Vector position) { this->position = position; }
+
+private:
+	Vector position;
+	Vector direction;
+};

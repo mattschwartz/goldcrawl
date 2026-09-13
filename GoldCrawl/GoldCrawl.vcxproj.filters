@@ -19,6 +19,12 @@
     <Filter Include="Source Files\engine">
       <UniqueIdentifier>{eccad32e-8357-4236-b2d6-c07cada565f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{c760f51f-af1a-482b-be07-b70a44832f58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game">
+      <UniqueIdentifier>{21750631-88f4-4c76-be2a-52ab2e7f2829}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GoldCrawl.cpp">
@@ -35,6 +41,15 @@
     </ClCompile>
     <ClCompile Include="SDLContext.cpp">
       <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldPlayerController.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldScene.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +83,24 @@
       <Filter>Header Files\engine</Filter>
     </ClInclude>
     <ClInclude Include="FileSystem.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldPlayerController.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldScene.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>

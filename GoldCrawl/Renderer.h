@@ -3,6 +3,8 @@
 #include "Prelude.h"
 #include <SDL_ttf.h>
 
+constexpr auto TILE_SIZE = 16;
+
 class Renderer
 {
 public:
