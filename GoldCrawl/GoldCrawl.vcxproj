@@ -185,6 +185,7 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Director.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Input.h" />

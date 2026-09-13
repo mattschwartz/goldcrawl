@@ -3,6 +3,7 @@
 #include <SDL_image.h>
 #include "SDLContext.h"
 #include "FileSystem.h"
+#include "Color.h"
 
 constexpr auto FONT_SIZE = 12;
 
@@ -16,7 +17,7 @@ Renderer::Renderer(const std::string& title, const int width, const int height, 
 		throw bacon::SDLError(std::format("failed to create renderer: {}", SDL_GetError()));
 	}
 
-	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255); // black
+	SDL_SetRenderDrawColor(_renderer, colors::darkest.r, colors::darkest.g, colors::darkest.b, colors::darkest.a); // dark from palette
 	SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
 	SDL_RenderSetLogicalSize(_renderer, width, height);
 	SDL_SetWindowMinimumSize(_window, width * scale, height * scale);
@@ -59,7 +60,7 @@ void Renderer::drawBox(SDL_Rect bounds, SDL_Color color, bool isFill) const
 	{
 		SDL_RenderDrawRect(_renderer, &bounds);
 	}
-	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
+	SDL_SetRenderDrawColor(_renderer, colors::darkest.r, colors::darkest.g, colors::darkest.b, colors::darkest.a);
 }
 
 void Renderer::drawSprite(const std::string& sprite, SDL_Rect bounds) const

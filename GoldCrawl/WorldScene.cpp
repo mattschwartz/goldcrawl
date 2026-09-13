@@ -1,4 +1,5 @@
 #include "WorldScene.h"
+#include "Color.h"
 
 WorldScene::WorldScene()
 {
@@ -28,6 +29,6 @@ void WorldScene::render(const Renderer& renderer) const
 	float y = player->getPosition().y;
 
 	renderer.drawSprite("Sprites/charlie.png", { (int)x, (int)y, 16, 16 });
-	renderer.drawBox({ (int)reticle.x, (int)reticle.y,16,16}, {255,0,0,255});
-	renderer.drawText("Hello world", 0, 0, { 255,255,255,255 });
+	renderer.drawBox({ (int)reticle.x, (int)reticle.y,16,16}, colors::base);
+	renderer.drawText("Hello world", 0, 0, colors::highlight);
 }
