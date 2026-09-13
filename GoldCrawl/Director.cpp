@@ -12,7 +12,7 @@ void Director::handleInput(Input& input)
 
 void Director::render(const Renderer& renderer)
 {
-	renderer.drawSprite("Sprites/sand.png", { 30,30, 8, 8 });
+	renderer.drawSprite("Sprites/charlie.png", { 30,30, 16, 16 });
 	renderer.drawBox({ 0,0,15,15 }, { 255,0,0,255 });
 	renderer.drawText("Hello world", 0, 0, { 255,255,255,255 });
 	// todo - invoke render on scene
