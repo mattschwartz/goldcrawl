@@ -1,5 +1,17 @@
 #include "Map.h"
 
+Map::Map()
+{
+	for (int x = 0; x < 10; ++x)
+	{
+		for (int y = 0; y < 9; ++y)
+		{
+			tilesByLayer[TileLayer::Ground].emplace(Point{ x,y }, 
+				std::make_shared<Tile>("Sprites/sand.png"));
+		}
+	}
+}
+
 std::vector<std::shared_ptr<Tile>> Map::getTilesAt(Vector position) const
 {
 	Point p{ (int)position.x, (int)position.y };

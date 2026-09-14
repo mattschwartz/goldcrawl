@@ -10,6 +10,8 @@ class Map
 public:
 	using Tilemap = std::unordered_map<Point, std::shared_ptr<Tile>>;
 
+	Map();
+
 	/// <summary>
 	/// returns all the tiles at the specified position, with topmost tile first,
 	/// depending on sortedTileLayer

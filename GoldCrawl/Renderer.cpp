@@ -79,6 +79,11 @@ void Renderer::drawSprite(const std::string& sprite, SDL_Rect bounds) const
 		texture = SDL_CreateTextureFromSurface(_renderer, srf);
 		SDL_FreeSurface(srf);
 		textureCache[cacheKey] = texture;
+		if (!texture)
+		{
+			SDL_LogError(0, "Sprite %s does not exist", sprite.c_str());
+			return;
+		}
 	}
 
 	SDL_RenderCopy(_renderer, texture, NULL, &bounds);

@@ -27,11 +27,20 @@ void WorldScene::render(const Renderer& renderer) const
 
 void WorldScene::renderMap(const Renderer& renderer) const
 {
-	// todo - get offset based on player? controller? updates?
-	//for (auto& tile : controller->getMap()->getTiles())
-	//{
-	//	renderer.drawSprite(tile->getSprite(), {});
-	//}
+	auto offs = controller->getMapOffset();
+	for (auto& layer : sortedTileLayers)
+	{
+		for (auto& [position, tile] : controller->getMap()->getTiles(layer))
+		{
+			int x = (position.x * TILE_SIZE) - (int)offs.x;
+			int y = (position.y * TILE_SIZE) - (int)offs.y;
+			renderer.drawSprite(tile->getSprite(), {
+				x,
+				y,
+				TILE_SIZE,
+				TILE_SIZE });
+		}
+	}
 }
 
 void WorldScene::renderPlayer(const Renderer& renderer) const

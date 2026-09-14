@@ -68,7 +68,5 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 		mapOffset.y += SCREEN_HEIGHT;
 	}
 
-	SDL_Log("Offs: %d, %d", (int)mapOffset.x, (int)mapOffset.y);
-
 	getPlayer()->setPosition(newPosition);
 }
