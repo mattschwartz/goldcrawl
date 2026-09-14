@@ -54,7 +54,7 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	{
 		SDL_Log("Scrolling right... from the left.. to the right");
 	}
-	if (newPosition.x + 16 > 144)
+	if (newPosition.x + TILE_SIZE > SCREEN_WIDTH)
 	{
 		SDL_Log("Scrolling left... from the right... to the left");
 	}
@@ -62,7 +62,7 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	{
 		SDL_Log("scrolling ^");
 	}
-	if (newPosition.y + 16 > 160)
+	if (newPosition.y + TILE_SIZE > SCREEN_HEIGHT)
 	{
 		SDL_Log("Scrolling down");
 	}

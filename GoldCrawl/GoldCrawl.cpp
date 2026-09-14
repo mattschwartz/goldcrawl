@@ -9,8 +9,6 @@
 
 #define TITLE "Clean, Crawl & Carry On"
 // Rule: gameboy base resolution, we'll scale up in post
-#define WIDTH 160
-#define HEIGHT 144
 #define SCALE 4
 
 static bool tick(Director& director, Input& input, Renderer& renderer)
@@ -40,7 +38,7 @@ int main(int argc, char* args[])
 		bacon::SDLContext ctx;
 		Director director(std::make_unique<WorldScene>(std::make_unique<Map>())); // WorldScene starting scene
 		Input input;
-		Renderer renderer(TITLE, WIDTH, HEIGHT, SCALE);
+		Renderer renderer(TITLE, SCREEN_WIDTH, SCREEN_HEIGHT, SCALE);
 
 		// for when we build for web using emscripten, which doesn't like infinite loops
 #ifdef __EMSCRIPTEN__

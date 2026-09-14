@@ -7,3 +7,7 @@
 #include <string>
 #include <optional>
 
+
+constexpr auto TILE_SIZE = 16;
+constexpr auto SCREEN_WIDTH = 160;
+constexpr auto SCREEN_HEIGHT = 144;
