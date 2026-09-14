@@ -162,9 +162,10 @@
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="GoldCrawl.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SDLContext.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="WorldPlayerController.cpp" />
     <ClCompile Include="WorldScene.cpp" />
   </ItemGroup>
@@ -189,12 +190,15 @@
     <ClInclude Include="Director.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Prelude.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SDLContext.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WorldPlayerController.h" />
     <ClInclude Include="WorldScene.h" />

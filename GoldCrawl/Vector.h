@@ -27,4 +27,9 @@ struct Vector
 			y - other.y
 		};
 	}
+
+	bool operator==(const Vector& other) const
+	{
+		return other.x == x && other.y == y;
+	}
 };

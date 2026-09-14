@@ -25,6 +25,12 @@
     <Filter Include="Source Files\game">
       <UniqueIdentifier>{21750631-88f4-4c76-be2a-52ab2e7f2829}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\map">
+      <UniqueIdentifier>{181e76e7-cec1-499d-8e6b-760ac05b5e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\map">
+      <UniqueIdentifier>{2179d307-b34d-4b52-87df-9069252db15c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GoldCrawl.cpp">
@@ -48,8 +54,11 @@
     <ClCompile Include="WorldScene.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\map</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Source Files\map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +113,15 @@
       <Filter>Header Files\engine</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Header Files\map</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header Files\map</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>

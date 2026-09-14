@@ -5,8 +5,9 @@ constexpr auto SPEED = 64;
 // slow down the diagonal movement
 constexpr auto DIAGONAL_SPEED = 64 * 0.75;
 
-WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player) :
-	PlayerController(std::move(player))
+WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap) :
+	PlayerController(std::move(player)),
+	currentMap(std::move(currentMap))
 {
 }
 
@@ -39,11 +40,32 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	auto position = getPlayer()->getPosition();
 	auto direction = getPlayer()->getDirection();
 
-	// todo - physics calculation
 	double sec = deltaMillis / 1000.0 + 0.00001;
 	double speed = (direction.x != 0 && direction.y != 0) ? DIAGONAL_SPEED : SPEED;
 
-	position.x += direction.x * sec * speed;
-	position.y += direction.y * sec * speed;
-	getPlayer()->setPosition(position);
+	Vector newPosition{ 0,0 };
+	newPosition.x = position.x + direction.x * sec * speed;
+	newPosition.y = position.y + direction.y * sec * speed;
+
+	// todo - test new position against physics calculation
+
+	// test whether the new position would trigger a screen scroll 
+	if (newPosition.x < 0)
+	{
+		SDL_Log("Scrolling right... from the left.. to the right");
+	}
+	if (newPosition.x + 16 > 144)
+	{
+		SDL_Log("Scrolling left... from the right... to the left");
+	}
+	if (newPosition.y < 0)
+	{
+		SDL_Log("scrolling ^");
+	}
+	if (newPosition.y + 16 > 160)
+	{
+		SDL_Log("Scrolling down");
+	}
+
+	getPlayer()->setPosition(newPosition);
 }

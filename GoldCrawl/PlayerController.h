@@ -7,7 +7,10 @@
 class PlayerController
 {
 public:
-	PlayerController(std::unique_ptr<Player> player);
+	PlayerController(std::unique_ptr<Player> player) :
+		player(std::move(player))
+	{
+	}
 
 	virtual void handleInput(const Input& input) {}
 	virtual void update(Uint64 deltaMillis) {}

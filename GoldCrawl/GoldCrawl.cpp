@@ -5,8 +5,9 @@
 #include "Director.h"
 #include "Input.h"
 #include "WorldScene.h"
+#include "Map.h"
 
-#define TITLE "Gold Crawl"
+#define TITLE "Clean, Crawl & Carry On"
 // Rule: gameboy base resolution, we'll scale up in post
 #define WIDTH 160
 #define HEIGHT 144
@@ -37,7 +38,7 @@ int main(int argc, char* args[])
 		// its destructor forces cleanup automatically when it falls
 		// out of scope
 		bacon::SDLContext ctx;
-		Director director(std::make_unique<WorldScene>()); // WorldScene starting scene
+		Director director(std::make_unique<WorldScene>(std::make_unique<Map>())); // WorldScene starting scene
 		Input input;
 		Renderer renderer(TITLE, WIDTH, HEIGHT, SCALE);
 
@@ -55,10 +56,12 @@ int main(int argc, char* args[])
 	catch (const std::exception& e)
 	{
 		SDL_LogError(0, "Exception occurred: %s", e.what());
+		return 1;
 	}
 	catch (...)
 	{
 		SDL_LogError(0, "Something bad happened, chief");
+		return 1;
 	}
 
 	return 0;

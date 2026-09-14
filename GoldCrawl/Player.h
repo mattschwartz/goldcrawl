@@ -9,6 +9,9 @@ public:
 	Vector getDirection() const { return direction; }
 	void setDirection(Vector direction) { this->direction = direction; }
 
+	/// <summary>
+	/// position within a map, so needs to be offset for drawing
+	/// </summary>
 	Vector getPosition() const { return position; }
 	void setPosition(Vector position) { this->position = position; }
 
