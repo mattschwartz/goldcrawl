@@ -7,7 +7,8 @@ constexpr auto DIAGONAL_SPEED = 64 * 0.75;
 
 WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap) :
 	PlayerController(std::move(player)),
-	currentMap(std::move(currentMap))
+	currentMap(std::move(currentMap)),
+	mapOffset()
 {
 }
 
@@ -50,22 +51,24 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	// todo - test new position against physics calculation
 
 	// test whether the new position would trigger a screen scroll 
-	if (newPosition.x < 0)
+	if (newPosition.x < mapOffset.x)
 	{
-		SDL_Log("Scrolling right... from the left.. to the right");
+		mapOffset.x -= SCREEN_WIDTH;
 	}
-	if (newPosition.x + TILE_SIZE > SCREEN_WIDTH)
+	if (newPosition.x + TILE_SIZE > mapOffset.x + SCREEN_WIDTH)
 	{
-		SDL_Log("Scrolling left... from the right... to the left");
+		mapOffset.x += SCREEN_WIDTH;
 	}
-	if (newPosition.y < 0)
+	if (newPosition.y < mapOffset.y)
 	{
-		SDL_Log("scrolling ^");
+		mapOffset.y -= SCREEN_HEIGHT;
 	}
-	if (newPosition.y + TILE_SIZE > SCREEN_HEIGHT)
+	if (newPosition.y + TILE_SIZE > mapOffset.y + SCREEN_HEIGHT)
 	{
-		SDL_Log("Scrolling down");
+		mapOffset.y += SCREEN_HEIGHT;
 	}
+
+	SDL_Log("Offs: %d, %d", (int)mapOffset.x, (int)mapOffset.y);
 
 	getPlayer()->setPosition(newPosition);
 }

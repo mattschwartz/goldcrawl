@@ -8,7 +8,6 @@
 #include "Map.h"
 
 #define TITLE "Clean, Crawl & Carry On"
-// Rule: gameboy base resolution, we'll scale up in post
 #define SCALE 4
 
 static bool tick(Director& director, Input& input, Renderer& renderer)
