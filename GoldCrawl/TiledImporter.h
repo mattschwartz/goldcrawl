@@ -31,6 +31,8 @@ namespace tiled
 		int imageHeight;
 		int imageWidth;
 		std::vector<std::shared_ptr<TileProperty>> properties;
+
+		bool hasCollision() const;
 	};
 
 	struct Tileset

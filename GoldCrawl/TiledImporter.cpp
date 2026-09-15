@@ -46,6 +46,7 @@ std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
                     auto tt = tileset->getTile(tileId);
                     if (!tt) throw tiled::TiledError("no such tile for id " + tileId);
                     auto tile = std::make_shared<Tile>(tt->image.substr(3));
+                    tile->setCollision(tt->hasCollision());
                     map->setTile(layer, tileX, tileY, tile);
                 }
             }
@@ -99,4 +100,17 @@ std::shared_ptr<tiled::Tile> tiled::Tileset::getTile(int id)
         if (t->id == id - firstGid) return t;
     }
     return nullptr;
+}
+
+bool tiled::Tile::hasCollision() const
+{
+    for (auto& prop : properties)
+    {
+        if (prop->name == "hasCollision")
+        {
+            // https://en.cppreference.com/cpp/utility/variant/get
+            return std::get<bool>(prop->value);
+        }
+    }
+    return false;
 }

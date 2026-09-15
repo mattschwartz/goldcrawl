@@ -41,6 +41,8 @@ public:
 	Tile(const std::string& sprite);
 
 	bool hasCollision() const { return collision; }
+	void setCollision(bool collision) { this->collision = collision; }
+
 	std::string getSprite() const;
 
 	virtual void interact() {} // player interacts with this tile
