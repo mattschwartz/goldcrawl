@@ -15,7 +15,25 @@ void WorldScene::handleInput(const Input& input)
 
 void WorldScene::update(Uint64 delta)
 {
-	// todo - update the world
+	// update the world
+	auto offs = controller->getMapOffset();
+	for (auto& layer : SortedTileLayers)
+	{
+		for (auto& [position, tile] : controller->getMap()->getTiles(layer))
+		{
+			int x = (position.x * TILE_SIZE) - (int)offs.x;
+			int y = (position.y * TILE_SIZE) - (int)offs.y;
+
+			// only update what's in view, plus the transition scenes
+			if (x < 0 || x > SCREEN_WIDTH
+				|| y < 0 || y > SCREEN_HEIGHT)
+			{
+				continue;
+			}
+			tile->update(delta);
+		}
+	}
+	// update the player
 	controller->update(delta);
 }
 
@@ -28,12 +46,20 @@ void WorldScene::render(const Renderer& renderer) const
 void WorldScene::renderMap(const Renderer& renderer) const
 {
 	auto offs = controller->getMapOffset();
-	for (auto& layer : sortedTileLayers)
+	for (auto& layer : SortedTileLayers)
 	{
 		for (auto& [position, tile] : controller->getMap()->getTiles(layer))
 		{
 			int x = (position.x * TILE_SIZE) - (int)offs.x;
 			int y = (position.y * TILE_SIZE) - (int)offs.y;
+
+			// only render what's in view, plus the transition scenes
+			if (x < 0 || x > SCREEN_WIDTH
+				|| y < 0 || y > SCREEN_HEIGHT)
+			{
+				continue;
+			}
+
 			renderer.drawSprite(tile->getSprite(), {
 				x,
 				y,

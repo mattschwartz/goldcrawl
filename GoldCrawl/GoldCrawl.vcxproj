@@ -131,7 +131,8 @@
       <EnableSegmentHeap>true</EnableSegmentHeap>
     </Manifest>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)Sprites" "$(TargetDir)Sprites" /E /I /Y</Command>
+      <Command>xcopy "$(ProjectDir)Sprites" "$(TargetDir)Sprites" /E /I /Y
+xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,7 +156,8 @@
       <EnableSegmentHeap>true</EnableSegmentHeap>
     </Manifest>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)Sprites" "$(TargetDir)Sprites" /E /I /Y</Command>
+      <Command>xcopy "$(ProjectDir)Sprites" "$(TargetDir)Sprites" /E /I /Y
+xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -166,6 +168,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SDLContext.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TiledImporter.cpp" />
     <ClCompile Include="WorldPlayerController.cpp" />
     <ClCompile Include="WorldScene.cpp" />
   </ItemGroup>
@@ -199,6 +202,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SDLContext.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TiledImporter.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WorldPlayerController.h" />
     <ClInclude Include="WorldScene.h" />

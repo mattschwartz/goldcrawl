@@ -9,7 +9,7 @@ std::string Tile::getSprite() const
 	return sprite;
 }
 
-void Tile::update(float delta)
+void Tile::update(Uint64 delta)
 {
 	// todo - animations and such
 }

@@ -2,13 +2,9 @@
 
 Map::Map()
 {
-	for (int x = 0; x < 10; ++x)
+	for (auto& layer : SortedTileLayers)
 	{
-		for (int y = 0; y < 9; ++y)
-		{
-			tilesByLayer[TileLayer::Ground].emplace(Point{ x,y }, 
-				std::make_shared<Tile>("Sprites/sand.png"));
-		}
+		tilesByLayer.emplace(layer, std::unordered_map<Point, std::shared_ptr<Tile>>{});
 	}
 }
 
@@ -16,7 +12,7 @@ std::vector<std::shared_ptr<Tile>> Map::getTilesAt(Vector position) const
 {
 	Point p{ (int)position.x, (int)position.y };
 	std::vector<std::shared_ptr<Tile>> result;
-	for (auto& layer : sortedTileLayers)
+	for (auto& layer : SortedTileLayers)
 	{
 		if (auto it = tilesByLayer.find(layer); it != tilesByLayer.end())
 		{
@@ -37,4 +33,9 @@ Map::Tilemap Map::getTiles(TileLayer layer) const
 		return it->second;
 	}
 	return {};
+}
+
+void Map::setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile)
+{
+	tilesByLayer[layer].emplace(Point{ x,y }, std::move(tile));
 }

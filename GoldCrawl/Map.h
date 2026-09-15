@@ -19,6 +19,8 @@ public:
 	std::vector<std::shared_ptr<Tile>> getTilesAt(Vector position) const;
 	Tilemap getTiles(TileLayer layer) const;
 
+	void setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile);
+
 private:
 	// tiles
 	std::unordered_map<TileLayer, Tilemap> tilesByLayer;

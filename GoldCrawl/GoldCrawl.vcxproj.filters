@@ -31,6 +31,12 @@
     <Filter Include="Source Files\map">
       <UniqueIdentifier>{2179d307-b34d-4b52-87df-9069252db15c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\tiled_importer">
+      <UniqueIdentifier>{588ad7fa-4f91-4a27-923d-6d39dda13096}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tiled_importer">
+      <UniqueIdentifier>{4e8df2b6-8745-48bd-b5c1-23a0272103e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GoldCrawl.cpp">
@@ -59,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files\map</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledImporter.cpp">
+      <Filter>Source Files\tiled_importer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +132,9 @@
     </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledImporter.h">
+      <Filter>Header Files\tiled_importer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
