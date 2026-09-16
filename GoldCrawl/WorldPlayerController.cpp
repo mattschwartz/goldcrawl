@@ -74,39 +74,61 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 
 bool WorldPlayerController::canMove(Vector& newPosition) const
 {
-	int x = newPosition.x;
-	int y = newPosition.y;
+	int x = std::floor(getPlayer()->getPosition().x / TILE_SIZE);
+	int y = std::floor(getPlayer()->getPosition().y / TILE_SIZE);
 
-	auto dir = getPlayer()->getDirection();
-	// moving to the right, account for player width
-	if (dir.x > 0)
+	// stay with me...
+	std::vector<SDL_Rect> collidingBounds;
+	// build a 3x3 grid around where the player is trying to move
+	// and construct a virtual room
+	for (int i = -1; i <= 1; ++i)
 	{
-		x += TILE_SIZE - 1; // player width
-	}
-	if (dir.y > 0)
-	{
-		y += TILE_SIZE - 1; //player height
-	}
-
-	if (getMap()->hasCollision((int)(x / TILE_SIZE), (int)(y / TILE_SIZE)))
-	{
-		// if we're moving diagonal, try sliding
-		if (dir.x != 0 && dir.y != 0)
+		for (int j = -1; j <= 1; ++j)
 		{
-			if (!getMap()->hasCollision((int)(getPlayer()->getPosition().x) / TILE_SIZE, (int)(y / TILE_SIZE)))
+			if (getMap()->hasCollision(x + i, y + j))
 			{
-				newPosition.x = getPlayer()->getPosition().x;
-				return true;
+				collidingBounds.push_back(SDL_Rect{
+					(x + i) * TILE_SIZE, (y + j) * TILE_SIZE,
+					TILE_SIZE, TILE_SIZE
+					});
 			}
-			if (!getMap()->hasCollision((int)x / TILE_SIZE, (int)((getPlayer()->getPosition().y) / TILE_SIZE)))
+		}
+	}
+
+	// http://tutorialedge.net/gamedev/aabb-collision-detection-tutorial/
+	const auto isCollision = [](float x, float y, SDL_Rect bounds) -> bool {
+		return (x + 1) < bounds.x + bounds.w &&
+			(x - 2 + TILE_SIZE) > bounds.x &&
+			(y + 1) < bounds.y + bounds.h &&
+			(y - 2 + TILE_SIZE) > bounds.y;
+		};
+	const auto anyCollision = [collidingBounds, isCollision](Vector position) -> bool {
+		for (auto& bounds : collidingBounds)
+		{
+			if (isCollision(position.x, position.y, bounds))
 			{
-				newPosition.y = getPlayer()->getPosition().y;
 				return true;
 			}
 		}
-
 		return false;
+		};
+
+	auto dir = getPlayer()->getDirection();
+
+	if (!anyCollision(newPosition)) return true;
+	if (dir.x != 0 && dir.y != 0)
+	{
+		if (!anyCollision(Vector{ newPosition.x, getPlayer()->getPosition().y }))
+		{
+			newPosition.y = getPlayer()->getPosition().y;
+			return true;
+		}
+		if (!anyCollision(Vector{ getPlayer()->getPosition().x, newPosition.y }))
+		{
+			newPosition.x = getPlayer()->getPosition().x;
+			return true;
+		}
 	}
 
-	return true;
+	return false;
 }

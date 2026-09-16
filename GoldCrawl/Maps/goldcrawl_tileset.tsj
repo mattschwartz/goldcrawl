@@ -3,7 +3,7 @@
  "name":"goldcrawl_tileset",
  "objectalignment":"topleft",
  "spacing":0,
- "tilecount":33,
+ "tilecount":34,
  "tiledversion":"1.12.1",
  "tileheight":16,
  "tiles":[
@@ -214,6 +214,12 @@
         {
          "id":34,
          "image":"..\/Sprites\/tile_3.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":35,
+         "image":"..\/Sprites\/tile_2_door.png",
          "imageheight":16,
          "imagewidth":16
         }],
