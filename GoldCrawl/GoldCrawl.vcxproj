@@ -165,8 +165,10 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClCompile Include="GoldCrawl.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SDLContext.cpp" />
+    <ClCompile Include="SpriteAnimation.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TiledImporter.cpp" />
     <ClCompile Include="WorldPlayerController.cpp" />
@@ -201,6 +203,8 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SDLContext.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteAnimation.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TiledImporter.h" />
     <ClInclude Include="Vector.h" />

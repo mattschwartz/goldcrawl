@@ -63,9 +63,9 @@ void Renderer::drawBox(SDL_Rect bounds, SDL_Color color, bool isFill) const
 	SDL_SetRenderDrawColor(_renderer, colors::darkest.r, colors::darkest.g, colors::darkest.b, colors::darkest.a);
 }
 
-void Renderer::drawSprite(const std::string& sprite, SDL_Rect bounds) const
+void Renderer::drawSprite(const Sprite& sprite, SDL_Rect bounds) const
 {
-	std::string cacheKey = sprite;
+	std::string cacheKey = sprite.filepath;
 
 	SDL_Texture* texture = nullptr;
 
@@ -75,18 +75,18 @@ void Renderer::drawSprite(const std::string& sprite, SDL_Rect bounds) const
 	}
 	else
 	{
-		SDL_Surface* srf = IMG_Load(sprite.c_str());
+		SDL_Surface* srf = IMG_Load(sprite.filepath.c_str());
 		texture = SDL_CreateTextureFromSurface(_renderer, srf);
 		SDL_FreeSurface(srf);
 		textureCache[cacheKey] = texture;
 		if (!texture)
 		{
-			SDL_LogError(0, "Sprite %s does not exist", sprite.c_str());
+			SDL_LogError(0, "Sprite %s does not exist", sprite.filepath.c_str());
 			return;
 		}
 	}
 
-	SDL_RenderCopy(_renderer, texture, NULL, &bounds);
+	SDL_RenderCopy(_renderer, texture, &sprite.sourceRect, &bounds);
 }
 
 void Renderer::drawText(const std::string& text, int x, int y, SDL_Color color) const

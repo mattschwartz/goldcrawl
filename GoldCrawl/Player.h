@@ -2,10 +2,18 @@
 
 #include "Prelude.h"
 #include "Vector.h"
+#include "Sprite.h"
+#include "SpriteAnimation.h"
 
 class Player
 {
 public:
+	Player();
+
+	const Sprite& getSprite() const;
+
+	void update(Uint64 deltaMillis);
+
 	Vector getDirection() const { return direction; }
 	void setDirection(Vector direction) { this->direction = direction; }
 
@@ -16,6 +24,8 @@ public:
 	void setPosition(Vector position) { this->position = position; }
 
 private:
-	Vector position{ 16,16 };
+	Vector position;
 	Vector direction;
+	Sprite sprite;
+	std::unique_ptr<SpriteAnimation> animation;
 };

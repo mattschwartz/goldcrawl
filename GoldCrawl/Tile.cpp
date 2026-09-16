@@ -1,12 +1,27 @@
 #include "Tile.h"
 
-Tile::Tile(const std::string& sprite) : sprite(sprite)
+Tile::Tile(const std::string& staticSpriteFilepath) :
+	sprite(Sprite{ staticSpriteFilepath }),
+	collision(false),
+	animation(nullptr)
 {
 }
 
-std::string Tile::getSprite() const
+Tile::Tile(std::unique_ptr<SpriteAnimation> animation) :
+	sprite(std::nullopt),
+	collision(false),
+	animation(std::move(animation))
 {
-	return sprite;
+}
+
+const Sprite& Tile::getSprite() const
+{
+	if (sprite.has_value())
+	{
+		return *sprite;
+	}
+
+	return animation->getSprite();
 }
 
 void Tile::update(Uint64 delta)

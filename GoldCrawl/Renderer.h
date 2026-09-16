@@ -2,6 +2,7 @@
 
 #include "Prelude.h"
 #include <SDL_ttf.h>
+#include "Sprite.h"
 
 class Renderer
 {
@@ -13,7 +14,7 @@ public:
 	void render() const;
 
 	void drawBox(SDL_Rect bounds, SDL_Color color, bool isFill = false) const;
-	void drawSprite(const std::string& sprite, SDL_Rect bounds) const;
+	void drawSprite(const Sprite& sprite, SDL_Rect bounds) const;
 	void drawText(const std::string& text, int x, int y, SDL_Color color) const;
 
 private:

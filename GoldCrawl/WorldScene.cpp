@@ -83,7 +83,7 @@ void WorldScene::renderPlayer(const Renderer& renderer) const
 	reticle.x -= controller->getMapOffset().x;
 	reticle.y -= controller->getMapOffset().y;
 
-	renderer.drawSprite("Sprites/charlie.png", { (int)x, (int)y, TILE_SIZE, TILE_SIZE });
+	renderer.drawSprite(player->getSprite(), {(int)x, (int)y, TILE_SIZE, TILE_SIZE});
 	//renderer.drawBox({ (int)reticle.x, (int)reticle.y, TILE_SIZE, TILE_SIZE }, colors::base);
 }
 

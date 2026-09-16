@@ -69,6 +69,12 @@
     <ClCompile Include="TiledImporter.cpp">
       <Filter>Source Files\tiled_importer</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteAnimation.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="dependencies\SDL2.dll">
@@ -135,6 +141,12 @@
     </ClInclude>
     <ClInclude Include="TiledImporter.h">
       <Filter>Header Files\tiled_importer</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimation.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

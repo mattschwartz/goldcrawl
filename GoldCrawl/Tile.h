@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Prelude.h"
+#include "SpriteAnimation.h"
 
 enum class TileLayer
 {
@@ -38,18 +39,20 @@ static std::vector<TileLayer> SortedTileLayers{
 class Tile
 {
 public:
-	Tile(const std::string& sprite);
+	Tile(const std::string& staticSpriteFilepath);
+	Tile(std::unique_ptr<SpriteAnimation> animation);
 
 	bool hasCollision() const { return collision; }
 	void setCollision(bool collision) { this->collision = collision; }
 
-	std::string getSprite() const;
+	const Sprite& getSprite() const;
 
 	virtual void interact() {} // player interacts with this tile
 	virtual void clean() {} // broom hits this tile
 	virtual void update(Uint64 delta); // todo - like animations
 
 private:
-	std::string sprite;
 	bool collision;
+	std::optional<Sprite> sprite;
+	std::unique_ptr<SpriteAnimation> animation;
 };
