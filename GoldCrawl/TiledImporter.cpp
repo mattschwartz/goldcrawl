@@ -82,6 +82,10 @@ std::unique_ptr<tiled::Tileset> TiledImporter::parseTileset(const std::string& f
                 {
                     prop->value = jProp["value"].get<bool>();
                 }
+                if (prop->type == "float")
+                {
+                    prop->value = jProp["value"].get<float>();
+                }
                 tile->properties.push_back(std::move(prop));
             }
         }

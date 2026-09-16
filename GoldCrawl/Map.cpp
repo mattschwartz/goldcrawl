@@ -37,5 +37,14 @@ Map::Tilemap Map::getTiles(TileLayer layer) const
 
 void Map::setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile)
 {
+	if (tile->hasCollision())
+	{
+		collisionTiles.emplace(Point{ x,y }, tile);
+	}
 	tilesByLayer[layer].emplace(Point{ x,y }, std::move(tile));
+}
+
+bool Map::hasCollision(int x, int y) const
+{
+	return collisionTiles.find(Point{ x,y }) != collisionTiles.end();
 }

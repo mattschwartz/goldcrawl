@@ -18,4 +18,6 @@ public:
 private:
 	std::unique_ptr<Map> currentMap;
 	Vector mapOffset;
+
+	bool canMove(Vector& newPosition) const;
 };

@@ -20,8 +20,10 @@ public:
 	Tilemap getTiles(TileLayer layer) const;
 
 	void setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile);
+	bool hasCollision(int x, int y) const;
 
 private:
 	// tiles
 	std::unordered_map<TileLayer, Tilemap> tilesByLayer;
+	Tilemap collisionTiles;
 };

@@ -16,6 +16,6 @@ public:
 	void setPosition(Vector position) { this->position = position; }
 
 private:
-	Vector position;
+	Vector position{ 16,16 };
 	Vector direction;
 };

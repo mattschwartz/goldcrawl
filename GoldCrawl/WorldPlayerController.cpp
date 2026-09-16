@@ -18,19 +18,19 @@ void WorldPlayerController::handleInput(const Input& input)
 
 	if (input.isBindingDown(KeyBinding::Down))
 	{
-		playerDirection.y = 1;
+		playerDirection.y += 1;
 	}
 	if (input.isBindingDown(KeyBinding::Up))
 	{
-		playerDirection.y = -1;
+		playerDirection.y += -1;
 	}
 	if (input.isBindingDown(KeyBinding::Left))
 	{
-		playerDirection.x = -1;
+		playerDirection.x += -1;
 	}
 	if (input.isBindingDown(KeyBinding::Right))
 	{
-		playerDirection.x = 1;
+		playerDirection.x += 1;
 	}
 
 	getPlayer()->setDirection(playerDirection);
@@ -48,7 +48,8 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	newPosition.x = position.x + direction.x * sec * speed;
 	newPosition.y = position.y + direction.y * sec * speed;
 
-	// todo - test new position against physics calculation
+	// can't move through walls
+	if (!canMove(newPosition)) return;
 
 	// test whether the new position would trigger a screen scroll 
 	if (newPosition.x < mapOffset.x)
@@ -69,4 +70,43 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	}
 
 	getPlayer()->setPosition(newPosition);
+}
+
+bool WorldPlayerController::canMove(Vector& newPosition) const
+{
+	int x = newPosition.x;
+	int y = newPosition.y;
+
+	auto dir = getPlayer()->getDirection();
+	// moving to the right, account for player width
+	if (dir.x > 0)
+	{
+		x += TILE_SIZE - 1; // player width
+	}
+	if (dir.y > 0)
+	{
+		y += TILE_SIZE - 1; //player height
+	}
+
+	if (getMap()->hasCollision((int)(x / TILE_SIZE), (int)(y / TILE_SIZE)))
+	{
+		// if we're moving diagonal, try sliding
+		if (dir.x != 0 && dir.y != 0)
+		{
+			if (!getMap()->hasCollision((int)(getPlayer()->getPosition().x) / TILE_SIZE, (int)(y / TILE_SIZE)))
+			{
+				newPosition.x = getPlayer()->getPosition().x;
+				return true;
+			}
+			if (!getMap()->hasCollision((int)x / TILE_SIZE, (int)((getPlayer()->getPosition().y) / TILE_SIZE)))
+			{
+				newPosition.y = getPlayer()->getPosition().y;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	return true;
 }
