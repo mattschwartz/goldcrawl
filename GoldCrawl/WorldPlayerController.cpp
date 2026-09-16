@@ -8,12 +8,16 @@ constexpr auto DIAGONAL_SPEED = 64 * 0.75;
 WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap) :
 	PlayerController(std::move(player)),
 	currentMap(std::move(currentMap)),
-	mapOffset()
+	mapOffset(),
+	sceneTransitioning(false),
+	transitionDurationMillis(0)
 {
 }
 
 void WorldPlayerController::handleInput(const Input& input)
 {
+	if (sceneTransitioning) return;
+
 	Vector playerDirection{ 0,0 };
 
 	if (input.isBindingDown(KeyBinding::Down))
@@ -38,6 +42,60 @@ void WorldPlayerController::handleInput(const Input& input)
 
 void WorldPlayerController::update(Uint64 deltaMillis)
 {
+	if (sceneTransitioning)
+	{
+		float deltaSec = deltaMillis / 1000.0 + 0.00001;
+		if (mapOffset.x < transitioningToMapOffset.x)
+		{
+			mapOffset.x += SCREEN_WIDTH * deltaSec;
+			// overshoot
+			if (mapOffset.x > transitioningToMapOffset.x)
+			{
+				mapOffset.x = transitioningToMapOffset.x;
+				transitionDurationMillis = 0;
+			}
+		}
+		else if (mapOffset.x > transitioningToMapOffset.x)
+		{
+			mapOffset.x -= SCREEN_WIDTH * deltaSec;
+			// overshoot
+			if (mapOffset.x < transitioningToMapOffset.x)
+			{
+				mapOffset.x = transitioningToMapOffset.x;
+				transitionDurationMillis = 0;
+			}
+		}
+		if (mapOffset.y < transitioningToMapOffset.y)
+		{
+			mapOffset.y += SCREEN_HEIGHT * deltaSec;
+			// overshoot
+			if (mapOffset.y > transitioningToMapOffset.y)
+			{
+				mapOffset.y = transitioningToMapOffset.y;
+				transitionDurationMillis = 0;
+			}
+		}
+		else if (mapOffset.y > transitioningToMapOffset.y)
+		{
+			mapOffset.y -= SCREEN_HEIGHT * deltaSec;
+			// overshoot
+			if (mapOffset.y < transitioningToMapOffset.y)
+			{
+				mapOffset.y = transitioningToMapOffset.y;
+				transitionDurationMillis = 0;
+			}
+		}
+
+		transitionDurationMillis -= deltaMillis;
+		if (transitionDurationMillis <= 0)
+		{
+			sceneTransitioning = false;
+			mapOffset.x = transitioningToMapOffset.x;
+			mapOffset.y = transitioningToMapOffset.y;
+		}
+		return;
+	}
+
 	auto position = getPlayer()->getPosition();
 	auto direction = getPlayer()->getDirection();
 
@@ -54,19 +112,30 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	// test whether the new position would trigger a screen scroll 
 	if (newPosition.x < mapOffset.x)
 	{
-		mapOffset.x -= SCREEN_WIDTH;
+		sceneTransitioning = true;
+		newPosition.x -= TILE_SIZE;
+		transitioningToMapOffset.x = mapOffset.x - SCREEN_WIDTH;
 	}
 	if (newPosition.x + TILE_SIZE > mapOffset.x + SCREEN_WIDTH)
 	{
-		mapOffset.x += SCREEN_WIDTH;
+		sceneTransitioning = true;
+		newPosition.x += TILE_SIZE;
+		transitioningToMapOffset.x = mapOffset.x + SCREEN_WIDTH;
 	}
 	if (newPosition.y < mapOffset.y)
 	{
-		mapOffset.y -= SCREEN_HEIGHT;
+		sceneTransitioning = true;
+		newPosition.y -= TILE_SIZE;
+		transitioningToMapOffset.y = mapOffset.y - SCREEN_HEIGHT + TILE_SIZE;
 	}
-	if (newPosition.y + TILE_SIZE > mapOffset.y + SCREEN_HEIGHT)
+	if (newPosition.y > mapOffset.y + SCREEN_HEIGHT - TILE_SIZE)
 	{
-		mapOffset.y += SCREEN_HEIGHT;
+		sceneTransitioning = true;
+		transitioningToMapOffset.y = mapOffset.y + SCREEN_HEIGHT - TILE_SIZE;
+	}
+	if (sceneTransitioning)
+	{
+		transitionDurationMillis = TRANSITION_DURATION;
 	}
 
 	getPlayer()->setPosition(newPosition);
@@ -96,6 +165,8 @@ bool WorldPlayerController::canMove(Vector& newPosition) const
 	}
 
 	// http://tutorialedge.net/gamedev/aabb-collision-detection-tutorial/
+	// making the player slightly smaller so that it doesn't get clipped on
+	// exact pixels
 	const auto isCollision = [](float x, float y, SDL_Rect bounds) -> bool {
 		return (x + 1) < bounds.x + bounds.w &&
 			(x - 2 + TILE_SIZE) > bounds.x &&

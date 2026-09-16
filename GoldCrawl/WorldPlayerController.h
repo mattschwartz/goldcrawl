@@ -4,6 +4,8 @@
 #include "Vector.h"
 #include "Map.h"
 
+constexpr auto TRANSITION_DURATION = 1000;
+
 class WorldPlayerController : public PlayerController
 {
 public:
@@ -18,6 +20,9 @@ public:
 private:
 	std::unique_ptr<Map> currentMap;
 	Vector mapOffset;
+	Vector transitioningToMapOffset;
+	bool sceneTransitioning;
+	long transitionDurationMillis;
 
 	bool canMove(Vector& newPosition) const;
 };

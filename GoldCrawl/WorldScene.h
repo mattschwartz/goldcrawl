@@ -19,4 +19,5 @@ private:
 
 	void renderMap(const Renderer& renderer) const;
 	void renderPlayer(const Renderer& renderer) const;
+	void renderToolbar(const Renderer& renderer) const;
 };

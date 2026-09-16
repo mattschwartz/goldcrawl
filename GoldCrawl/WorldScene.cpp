@@ -25,8 +25,8 @@ void WorldScene::update(Uint64 delta)
 			int y = (position.y * TILE_SIZE) - (int)offs.y;
 
 			// only update what's in view, plus the transition scenes
-			if (x < 0 || x > SCREEN_WIDTH
-				|| y < 0 || y > SCREEN_HEIGHT)
+			if (x < -TILE_SIZE || x > SCREEN_WIDTH + TILE_SIZE
+				|| y < -TILE_SIZE || y > SCREEN_HEIGHT + TILE_SIZE)
 			{
 				continue;
 			}
@@ -41,6 +41,7 @@ void WorldScene::render(const Renderer& renderer) const
 {
 	renderMap(renderer);
 	renderPlayer(renderer);
+	renderToolbar(renderer);
 }
 
 void WorldScene::renderMap(const Renderer& renderer) const
@@ -54,8 +55,8 @@ void WorldScene::renderMap(const Renderer& renderer) const
 			int y = (position.y * TILE_SIZE) - (int)offs.y;
 
 			// only render what's in view, plus the transition scenes
-			if (x < 0 || x > SCREEN_WIDTH
-				|| y < 0 || y > SCREEN_HEIGHT)
+			if (x < -TILE_SIZE || x > SCREEN_WIDTH + TILE_SIZE
+				|| y < -TILE_SIZE || y > SCREEN_HEIGHT + TILE_SIZE)
 			{
 				continue;
 			}
@@ -83,6 +84,10 @@ void WorldScene::renderPlayer(const Renderer& renderer) const
 	reticle.y -= controller->getMapOffset().y;
 
 	renderer.drawSprite("Sprites/charlie.png", { (int)x, (int)y, TILE_SIZE, TILE_SIZE });
-	renderer.drawBox({ (int)reticle.x, (int)reticle.y, TILE_SIZE, TILE_SIZE }, colors::base);
-	renderer.drawText("Hello world", 0, 0, colors::highlight);
+	//renderer.drawBox({ (int)reticle.x, (int)reticle.y, TILE_SIZE, TILE_SIZE }, colors::base);
+}
+
+void WorldScene::renderToolbar(const Renderer& renderer) const
+{
+	renderer.drawBox({ 0, 144 - 16, SCREEN_WIDTH, TILE_SIZE }, colors::highlight, true);
 }
