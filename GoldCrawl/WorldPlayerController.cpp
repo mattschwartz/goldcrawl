@@ -112,6 +112,9 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	newPosition.x = position.x + direction.x * sec * speed;
 	newPosition.y = position.y + direction.y * sec * speed;
 
+	getPlayer()->update(deltaMillis);
+	getMap()->update(deltaMillis);
+
 	// can't move through walls
 	if (!canMove(newPosition)) return;
 
@@ -145,8 +148,6 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	}
 
 	getPlayer()->setPosition(newPosition);
-	getPlayer()->update(deltaMillis);
-	getMap()->update(deltaMillis);
 }
 
 bool WorldPlayerController::canMove(Vector& newPosition) const
