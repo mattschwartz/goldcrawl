@@ -35,6 +35,16 @@
                  "name":"animation",
                  "type":"string",
                  "value":"trap_spears_sprung.json"
+                }, 
+                {
+                 "name":"interaction",
+                 "type":"string",
+                 "value":"reset_trap"
+                }, 
+                {
+                 "name":"trap_set_sprite",
+                 "type":"string",
+                 "value":"trap_1_set.png"
                 }]
         }, 
         {
