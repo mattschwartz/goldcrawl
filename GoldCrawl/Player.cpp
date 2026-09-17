@@ -32,28 +32,36 @@ void Player::setDirection(Vector direction)
 		{
 			animation->setCycle("idle_right");
 		}
-		else
+		else if (oldDirection.x < 0)
 		{
 			animation->setCycle("idle_left");
 		}
+		else if (oldDirection.y < 0)
+		{
+			animation->setCycle("idle_up");
+		}
+		else
+		{
+			animation->setCycle("idle_down");
+		}
 		return;
 	}
-	if (oldDirection.x <= 0 && direction.x > 0)
+	if (direction.x > 0)
 	{
 		animation->setCycle("walk_right");
 		return;
 	}
-	if (oldDirection.x >= 0 && direction.x < 0)
+	if (direction.x < 0)
 	{
 		animation->setCycle("walk_left");
 		return;
 	}
-	if (oldDirection.y <= 0 && direction.y > 0)
+	if ( direction.y > 0)
 	{
 		animation->setCycle("walk_down");
 		return;
 	}
-	if (oldDirection.y >= 0 && direction.y < 0)
+	if (direction.y < 0)
 	{
 		animation->setCycle("walk_up");
 		return;
