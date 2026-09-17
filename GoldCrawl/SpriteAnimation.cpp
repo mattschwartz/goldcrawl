@@ -4,7 +4,8 @@
 
 using namespace nlohmann;
 
-SpriteAnimation::SpriteAnimation(const std::string& filepath) :
+SpriteAnimation::SpriteAnimation(const std::string& filepath, const std::string& startingCycle) :
+    hold(0),
     currentFrame(nullptr),
     currentSprite(std::make_unique<Sprite>(filepath)),
     frameIndex(0)
@@ -43,7 +44,6 @@ SpriteAnimation::SpriteAnimation(const std::string& filepath) :
                 cycles[name].push_back(frames[i].get());
             }
         }
-        setCycle(j["meta"]["frameTags"][0]["name"]);
     }
     else
     {
@@ -52,8 +52,9 @@ SpriteAnimation::SpriteAnimation(const std::string& filepath) :
         {
             cycles[""].push_back(frames[i].get());
         }
-        setCycle("");
     }
+
+    setCycle(startingCycle);
 }
 
 void SpriteAnimation::setCycle(const std::string& cycle)

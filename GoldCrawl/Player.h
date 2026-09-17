@@ -15,7 +15,7 @@ public:
 	void update(Uint64 deltaMillis);
 
 	Vector getDirection() const { return direction; }
-	void setDirection(Vector direction) { this->direction = direction; }
+	void setDirection(Vector direction);
 
 	/// <summary>
 	/// position within a map, so needs to be offset for drawing

@@ -15,7 +15,7 @@ struct SpriteFrame
 class SpriteAnimation
 {
 public:
-	SpriteAnimation(const std::string& filepath);
+	SpriteAnimation(const std::string& filepath, const std::string& startingCycle);
 
 	const Sprite& getSprite() const { return *currentSprite; }
 	void setCycle(const std::string& cycle);
