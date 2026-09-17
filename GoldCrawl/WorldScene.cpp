@@ -16,23 +16,23 @@ void WorldScene::handleInput(const Input& input)
 void WorldScene::update(Uint64 delta)
 {
 	// update the world
-	auto offs = controller->getMapOffset();
-	for (auto& layer : SortedTileLayers)
-	{
-		for (auto& [position, tile] : controller->getMap()->getTiles(layer))
-		{
-			int x = (position.x * TILE_SIZE) - (int)offs.x;
-			int y = (position.y * TILE_SIZE) - (int)offs.y;
+	//auto offs = controller->getMapOffset();
+	//for (auto& layer : SortedTileLayers)
+	//{
+	//	for (auto& [position, tile] : controller->getMap()->getTiles(layer))
+	//	{
+	//		int x = (position.x * TILE_SIZE) - (int)offs.x;
+	//		int y = (position.y * TILE_SIZE) - (int)offs.y;
 
-			// only update what's in view, plus the transition scenes
-			if (x < -TILE_SIZE || x > SCREEN_WIDTH + TILE_SIZE
-				|| y < -TILE_SIZE || y > SCREEN_HEIGHT + TILE_SIZE)
-			{
-				continue;
-			}
-			tile->update(delta);
-		}
-	}
+	//		// only update what's in view, plus the transition scenes
+	//		if (x < -TILE_SIZE || x > SCREEN_WIDTH + TILE_SIZE
+	//			|| y < -TILE_SIZE || y > SCREEN_HEIGHT + TILE_SIZE)
+	//		{
+	//			continue;
+	//		}
+	//		tile->update(delta);
+	//	}
+	//}
 	// update the player
 	controller->update(delta);
 }
@@ -66,6 +66,11 @@ void WorldScene::renderMap(const Renderer& renderer) const
 				y,
 				TILE_SIZE,
 				TILE_SIZE });
+			if (tile->getMaxHealth() > 0)
+			{
+				renderer.drawBox({ x, y + TILE_SIZE, TILE_SIZE, 2 }, colors::darkest, true);
+				renderer.drawBox({ x, y + TILE_SIZE, (int)(TILE_SIZE * tile->getCurrentHealth() / tile->getMaxHealth()), 2}, colors::base, true);
+			}
 		}
 	}
 }

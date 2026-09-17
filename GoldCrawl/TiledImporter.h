@@ -33,6 +33,7 @@ namespace tiled
 		std::vector<std::shared_ptr<TileProperty>> properties;
 
 		bool hasCollision() const;
+		float getHealth() const;
 	};
 
 	struct Tileset

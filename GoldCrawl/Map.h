@@ -16,11 +16,13 @@ public:
 	/// returns all the tiles at the specified position, with topmost tile first,
 	/// depending on sortedTileLayer
 	/// </summary>
-	std::vector<std::shared_ptr<Tile>> getTilesAt(Vector position) const;
+	std::vector<std::shared_ptr<Tile>> getTilesAt(int x, int y) const;
 	Tilemap getTiles(TileLayer layer) const;
 
 	void setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile);
 	bool hasCollision(int x, int y) const;
+
+	void update(Uint64 deltaMillis);
 
 private:
 	// tiles

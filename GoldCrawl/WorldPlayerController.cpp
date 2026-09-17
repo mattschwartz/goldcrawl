@@ -146,6 +146,7 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 
 	getPlayer()->setPosition(newPosition);
 	getPlayer()->update(deltaMillis);
+	getMap()->update(deltaMillis);
 }
 
 bool WorldPlayerController::canMove(Vector& newPosition) const

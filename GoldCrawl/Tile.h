@@ -45,14 +45,25 @@ public:
 	bool hasCollision() const { return collision; }
 	void setCollision(bool collision) { this->collision = collision; }
 
+	float getCurrentHealth() const { return currentHealth; }
+	float getMaxHealth() const { return maxHealth; }
+	void takeDamage(float cleanDamage);
+
 	const Sprite& getSprite() const;
 
 	virtual void interact() {} // player interacts with this tile
 	virtual void clean() {} // broom hits this tile
 	virtual void update(Uint64 delta); // todo - like animations
 
+	friend class TiledImporter;
+	friend class Map;
+
 private:
+	bool shouldRemove;
 	bool collision;
+	// represents how dirty the tile is. 0.0 = clean, broom deals clean damage aginst debris
+	float maxHealth;
+	float currentHealth;
 	std::optional<Sprite> sprite;
 	std::unique_ptr<SpriteAnimation> animation;
 };

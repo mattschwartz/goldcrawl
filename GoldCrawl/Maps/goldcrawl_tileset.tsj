@@ -107,7 +107,13 @@
          "id":17,
          "image":"..\/Sprites\/cracks_1.png",
          "imageheight":16,
-         "imagewidth":16
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"health",
+                 "type":"float",
+                 "value":15
+                }]
         }, 
         {
          "id":19,
@@ -122,7 +128,7 @@
          "imagewidth":16,
          "properties":[
                 {
-                 "name":"dirtyHealth",
+                 "name":"health",
                  "type":"float",
                  "value":10
                 }]

@@ -8,9 +8,9 @@ Map::Map()
 	}
 }
 
-std::vector<std::shared_ptr<Tile>> Map::getTilesAt(Vector position) const
+std::vector<std::shared_ptr<Tile>> Map::getTilesAt(int x, int y) const
 {
-	Point p{ (int)position.x, (int)position.y };
+	Point p{ x, y };
 	std::vector<std::shared_ptr<Tile>> result;
 	for (auto& layer : SortedTileLayers)
 	{
@@ -47,4 +47,25 @@ void Map::setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile)
 bool Map::hasCollision(int x, int y) const
 {
 	return collisionTiles.find(Point{ x,y }) != collisionTiles.end();
+}
+
+void Map::update(Uint64 deltaMillis)
+{
+	for (auto& [_, tiles] : tilesByLayer)
+	{
+		std::vector<Point> toRemove;
+		for (auto& [point, tile] : tiles)
+		{
+			tile->update(deltaMillis);
+
+			if (tile->shouldRemove)
+			{
+				toRemove.push_back(point);
+			}
+		}
+		for (auto& t : toRemove)
+		{
+			tiles.erase(t);
+		}
+	}
 }

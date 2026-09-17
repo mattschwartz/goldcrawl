@@ -47,6 +47,7 @@ std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
                     if (!tt) throw tiled::TiledError("no such tile for id " + tileId);
                     auto tile = std::make_shared<Tile>(tt->image.substr(3));
                     tile->setCollision(tt->hasCollision());
+                    tile->maxHealth = tile->currentHealth = tt->getHealth();
                     map->setTile(layer, tileX, tileY, tile);
                 }
             }
@@ -117,4 +118,16 @@ bool tiled::Tile::hasCollision() const
         }
     }
     return false;
+}
+
+float tiled::Tile::getHealth() const
+{
+    for (auto& prop : properties)
+    {
+        if (prop->name == "health")
+        {
+            return std::get<float>(prop->value);
+        }
+    }
+    return 0.0;
 }
