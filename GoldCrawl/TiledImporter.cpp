@@ -45,7 +45,19 @@ std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
                     if (tileId == 0) continue;
                     auto tt = tileset->getTile(tileId);
                     if (!tt) throw tiled::TiledError("no such tile for id " + tileId);
-                    auto tile = std::make_shared<Tile>(tt->image.substr(3));
+
+                    std::shared_ptr<Tile> tile;
+                    if (tt->getAnimation().has_value())
+                    {
+                        std::string animationFilepath = "Sprites/" + tt->getAnimation().value();
+                        auto tileAnimation = std::make_unique<SpriteAnimation>(animationFilepath, "", true);
+                        tile = std::make_shared<Tile>(std::move(tileAnimation));
+                    }
+                    else
+                    {
+                        tile = std::make_shared<Tile>(tt->image.substr(3));
+                    }
+
                     tile->setCollision(tt->hasCollision());
                     tile->maxHealth = tile->currentHealth = tt->getHealth();
                     map->setTile(layer, tileX, tileY, tile);
@@ -86,6 +98,10 @@ std::unique_ptr<tiled::Tileset> TiledImporter::parseTileset(const std::string& f
                 if (prop->type == "float")
                 {
                     prop->value = jProp["value"].get<float>();
+                }
+                if (prop->type == "string")
+                {
+                    prop->value = jProp["value"].get<std::string>();
                 }
                 tile->properties.push_back(std::move(prop));
             }
@@ -130,4 +146,16 @@ float tiled::Tile::getHealth() const
         }
     }
     return 0.0;
+}
+
+std::optional<std::string> tiled::Tile::getAnimation() const
+{
+    for (auto& prop : properties)
+    {
+        if (prop->name == "animation")
+        {
+            return std::get<std::string>(prop->value);
+        }
+    }
+    return std::nullopt;
 }

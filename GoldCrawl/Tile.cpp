@@ -39,4 +39,5 @@ const Sprite& Tile::getSprite() const
 void Tile::update(Uint64 delta)
 {
 	// todo - animations and such
+	if (animation) animation->update(delta);
 }

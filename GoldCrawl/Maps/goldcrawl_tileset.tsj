@@ -29,7 +29,13 @@
          "id":4,
          "image":"..\/Sprites\/trap_1_sprung.png",
          "imageheight":16,
-         "imagewidth":16
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"animation",
+                 "type":"string",
+                 "value":"trap_spears_sprung.json"
+                }]
         }, 
         {
          "id":5,
@@ -41,7 +47,13 @@
          "id":6,
          "image":"..\/Sprites\/trap_2_sprung.png",
          "imageheight":16,
-         "imagewidth":16
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"animation",
+                 "type":"string",
+                 "value":"trap_saw_blades_spinning.json"
+                }]
         }, 
         {
          "id":7,

@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <variant>
+#include <optional>
 #include <nlohmann/json.hpp>
 #include "Map.h"
 
@@ -34,6 +35,7 @@ namespace tiled
 
 		bool hasCollision() const;
 		float getHealth() const;
+		std::optional<std::string> getAnimation() const;
 	};
 
 	struct Tileset
