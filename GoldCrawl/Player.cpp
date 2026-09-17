@@ -4,7 +4,8 @@ Player::Player() :
 	position({ 16, 16 }),
 	direction(),
 	sprite(Sprite{ "Sprites/charlie.png" }),
-	animation(std::make_unique<SpriteAnimation>("Sprites/charlie.json", "idle_right"))
+	broom(std::make_unique<Broom>()),
+	animation(std::make_unique<SpriteAnimation>("Sprites/charlie.json", "idle_right", true))
 {
 }
 
@@ -18,6 +19,7 @@ const Sprite& Player::getSprite() const
 void Player::update(Uint64 deltaMillis)
 {
 	animation->update(deltaMillis);
+	broom->update(deltaMillis);
 }
 
 void Player::setDirection(Vector direction)

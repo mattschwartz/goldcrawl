@@ -4,7 +4,9 @@
 
 using namespace nlohmann;
 
-SpriteAnimation::SpriteAnimation(const std::string& filepath, const std::string& startingCycle) :
+SpriteAnimation::SpriteAnimation(const std::string& filepath, const std::string& startingCycle, bool loop) :
+    loop(loop),
+    complete(false),
     hold(0),
     currentFrame(nullptr),
     currentSprite(std::make_unique<Sprite>(filepath)),
@@ -31,10 +33,13 @@ SpriteAnimation::SpriteAnimation(const std::string& filepath, const std::string&
         frames.push_back(std::move(frame));
     }
 
+    bool anyTags = false;
     if (j["meta"].contains("frameTags") && j["meta"]["frameTags"].is_array())
     {
         for (auto& jTag : j["meta"]["frameTags"])
         {
+            anyTags = true; // lazy hack
+
             std::string name = jTag["name"];
             int startFrame = jTag["from"];
             int endFrame = jTag["to"];
@@ -45,7 +50,7 @@ SpriteAnimation::SpriteAnimation(const std::string& filepath, const std::string&
             }
         }
     }
-    else
+    if (!anyTags)
     {
         cycles.emplace("", std::vector<SpriteFrame*>{});
         for (int i = 0; i < frames.size();++i)
@@ -65,6 +70,7 @@ void SpriteAnimation::setCycle(const std::string& cycle)
         return;
     }
 
+    complete = false;
     currentCycle = cycle;
     frameIndex = 0;
     currentFrame = cycles[cycle][0];
@@ -75,6 +81,7 @@ void SpriteAnimation::setCycle(const std::string& cycle)
 void SpriteAnimation::update(Uint64 deltaMillis)
 {
     if (frames.empty()) return;
+    if (!loop && complete) return;
 
     hold -= deltaMillis;
     if (hold <= 0)
@@ -82,6 +89,7 @@ void SpriteAnimation::update(Uint64 deltaMillis)
         ++frameIndex;
         if (frameIndex >= cycles[currentCycle].size())
         {
+            complete = true;
             frameIndex = 0;
         }
         currentFrame = cycles[currentCycle][frameIndex];

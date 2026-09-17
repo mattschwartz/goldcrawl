@@ -75,6 +75,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Broom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="dependencies\SDL2.dll">
@@ -147,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="SpriteAnimation.h">
       <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Broom.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

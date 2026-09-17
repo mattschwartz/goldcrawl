@@ -161,6 +161,7 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Broom.cpp" />
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="GoldCrawl.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -191,6 +192,7 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Broom.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Director.h" />
     <ClInclude Include="FileSystem.h" />

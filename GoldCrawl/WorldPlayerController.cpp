@@ -1,4 +1,5 @@
 #include "WorldPlayerController.h"
+#include "Broom.h"
 
 // pixels per second
 constexpr auto SPEED = 64;
@@ -9,6 +10,7 @@ WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std
 	PlayerController(std::move(player)),
 	currentMap(std::move(currentMap)),
 	mapOffset(),
+	transitioningToMapOffset(),
 	sceneTransitioning(false),
 	transitionDurationMillis(0)
 {
@@ -35,6 +37,10 @@ void WorldPlayerController::handleInput(const Input& input)
 	if (input.isBindingDown(KeyBinding::Right))
 	{
 		playerDirection.x += 1;
+	}
+	if (input.isBindingPressed(KeyBinding::B))
+	{
+		getPlayer()->getBroom()->sweepBroom(getPlayer()->getPosition(), getMap());
 	}
 
 	getPlayer()->setDirection(playerDirection);

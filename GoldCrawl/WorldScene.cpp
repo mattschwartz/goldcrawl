@@ -84,6 +84,13 @@ void WorldScene::renderPlayer(const Renderer& renderer) const
 	reticle.y -= controller->getMapOffset().y;
 
 	renderer.drawSprite(player->getSprite(), {(int)x, (int)y, TILE_SIZE, TILE_SIZE});
+
+	auto broomPosition = player->getBroom()->getPosition();
+	broomPosition.x -= controller->getMapOffset().x;
+	broomPosition.y -= controller->getMapOffset().y;
+
+	renderer.drawSprite(player->getBroom()->getSprite(), broomPosition);
+
 	//renderer.drawBox({ (int)reticle.x, (int)reticle.y, TILE_SIZE, TILE_SIZE }, colors::base);
 }
 
