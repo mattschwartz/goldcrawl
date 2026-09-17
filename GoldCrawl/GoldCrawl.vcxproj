@@ -172,6 +172,7 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClCompile Include="SpriteAnimation.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TiledImporter.cpp" />
+    <ClCompile Include="TrapTile.cpp" />
     <ClCompile Include="WorldPlayerController.cpp" />
     <ClCompile Include="WorldScene.cpp" />
   </ItemGroup>
@@ -209,6 +210,7 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClInclude Include="SpriteAnimation.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TiledImporter.h" />
+    <ClInclude Include="TrapTile.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WorldPlayerController.h" />
     <ClInclude Include="WorldScene.h" />

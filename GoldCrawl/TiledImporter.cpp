@@ -2,6 +2,7 @@
 
 #include <nlohmann/json.hpp>
 #include "FileSystem.h"
+#include "TrapTile.h"
 
 using namespace nlohmann;
 
@@ -47,15 +48,28 @@ std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
                     if (!tt) throw tiled::TiledError("no such tile for id " + tileId);
 
                     std::shared_ptr<Tile> tile;
+
+                    // todo - construct the specific type of tile
+                    auto interaction = tt->getInteraction();
+                    if (interaction == "reset_trap")
+                    {
+                        std::string spriteName = tt->getStringProp("trap_set_sprite").value_or("");
+                        tile = std::make_shared<TrapTile>("Sprites/" + spriteName);
+                    }
+                    else // default tile
+                    {
+                        tile = std::make_shared<Tile>();
+                    }
+
                     if (tt->getAnimation().has_value())
                     {
                         std::string animationFilepath = "Sprites/" + tt->getAnimation().value();
                         auto tileAnimation = std::make_unique<SpriteAnimation>(animationFilepath, "", true);
-                        tile = std::make_shared<Tile>(std::move(tileAnimation));
+                        tile->animation = std::move(tileAnimation);
                     }
                     else
                     {
-                        tile = std::make_shared<Tile>(tt->image.substr(3));
+                        tile->sprite = tt->image.substr(3);
                     }
 
                     tile->setCollision(tt->hasCollision());
@@ -150,9 +164,19 @@ float tiled::Tile::getHealth() const
 
 std::optional<std::string> tiled::Tile::getAnimation() const
 {
+    return getStringProp("animation");
+}
+
+std::optional<std::string> tiled::Tile::getInteraction() const
+{
+    return getStringProp("interaction");
+}
+
+std::optional<std::string> tiled::Tile::getStringProp(const std::string& propName) const
+{
     for (auto& prop : properties)
     {
-        if (prop->name == "animation")
+        if (prop->name == propName)
         {
             return std::get<std::string>(prop->value);
         }

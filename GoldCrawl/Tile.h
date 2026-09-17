@@ -39,8 +39,9 @@ static std::vector<TileLayer> SortedTileLayers{
 class Tile
 {
 public:
-	Tile(const std::string& staticSpriteFilepath);
-	Tile(std::unique_ptr<SpriteAnimation> animation);
+	Tile();
+
+	virtual bool isInteractable() const { return false; }
 
 	bool hasCollision() const { return collision; }
 	void setCollision(bool collision) { this->collision = collision; }
@@ -58,12 +59,14 @@ public:
 	friend class TiledImporter;
 	friend class Map;
 
+protected:
+	std::optional<Sprite> sprite;
+	std::unique_ptr<SpriteAnimation> animation;
+
 private:
 	bool shouldRemove;
 	bool collision;
 	// represents how dirty the tile is. 0.0 = clean, broom deals clean damage aginst debris
 	float maxHealth;
 	float currentHealth;
-	std::optional<Sprite> sprite;
-	std::unique_ptr<SpriteAnimation> animation;
 };

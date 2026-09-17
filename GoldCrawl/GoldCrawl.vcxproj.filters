@@ -78,6 +78,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+    <ClCompile Include="TrapTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="dependencies\SDL2.dll">
@@ -153,6 +156,9 @@
     </ClInclude>
     <ClInclude Include="Broom.h">
       <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="TrapTile.h">
+      <Filter>Header Files\map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

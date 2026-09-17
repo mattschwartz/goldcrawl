@@ -16,6 +16,15 @@ WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std
 {
 }
 
+Tile* WorldPlayerController::getTargetedTile() const
+{
+	if (auto lock = targetedTile.lock())
+	{
+		return lock.get();
+	}
+	return nullptr;
+}
+
 void WorldPlayerController::handleInput(const Input& input)
 {
 	if (sceneTransitioning) return;
@@ -41,6 +50,13 @@ void WorldPlayerController::handleInput(const Input& input)
 	if (input.isBindingPressed(KeyBinding::B))
 	{
 		getPlayer()->getBroom()->sweepBroom(getPlayer()->getPosition(), getMap());
+	}
+	if (input.isBindingPressed(KeyBinding::A))
+	{
+		if (auto lock = targetedTile.lock())
+		{
+			lock->interact();
+		}
 	}
 
 	getPlayer()->setDirection(playerDirection);
@@ -114,6 +130,8 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 
 	getPlayer()->update(deltaMillis);
 	getMap()->update(deltaMillis);
+
+	testInteractables();
 
 	// can't move through walls
 	if (!canMove(newPosition)) return;
@@ -210,5 +228,103 @@ bool WorldPlayerController::canMove(Vector& newPosition) const
 		}
 	}
 
+	return false;
+}
+
+bool WorldPlayerController::testInteractables()
+{
+	auto player = getPlayer();
+	auto pos = player->getPosition();
+	auto facing = player->getFacing();
+	auto map = getMap();
+
+	// normalized to where the player is on the map grid
+	int mapX = std::round(pos.x / TILE_SIZE);
+	int mapY = std::round(pos.y / TILE_SIZE);
+
+	if (auto it = map->getInteractable(mapX, mapY))
+	{
+		targetedTile = it;
+		return true;
+	}
+
+	// looking right
+	if (facing.x > 0)
+	{
+		if (auto it = map->getInteractable(mapX + 1, mapY))
+		{
+			targetedTile = it;
+			return true;
+		}
+		if (auto it = map->getInteractable(mapX + 1, mapY - 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+		if (auto it = map->getInteractable(mapX + 1, mapY + 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+	}
+	// looking left
+	else if (facing.x < 0)
+	{
+		if (auto it = map->getInteractable(mapX - 1, mapY))
+		{
+			targetedTile = it;
+			return true;
+		}
+		if (auto it = map->getInteractable(mapX - 1, mapY - 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+		if (auto it = map->getInteractable(mapX - 1, mapY + 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+	}
+	// looking up
+	else if (facing.y < 0)
+	{
+		if (auto it = map->getInteractable(mapX, mapY - 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+		if (auto it = map->getInteractable(mapX - 1, mapY - 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+		if (auto it = map->getInteractable(mapX + 1, mapY - 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+	}
+	// looking down
+	else if (facing.y > 0)
+	{
+		if (auto it = map->getInteractable(mapX, mapY + 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+		if (auto it = map->getInteractable(mapX - 1, mapY + 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+		if (auto it = map->getInteractable(mapX + 1, mapY + 1))
+		{
+			targetedTile = it;
+			return true;
+		}
+	}
+
+	targetedTile.reset();
 	return false;
 }

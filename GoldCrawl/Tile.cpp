@@ -1,22 +1,12 @@
 #include "Tile.h"
 
-Tile::Tile(const std::string& staticSpriteFilepath) :
-	sprite(Sprite{ staticSpriteFilepath }),
-	shouldRemove(false),
-	maxHealth(),
-	currentHealth(),
-	collision(false),
-	animation(nullptr)
-{
-}
-
-Tile::Tile(std::unique_ptr<SpriteAnimation> animation) :
+Tile::Tile() :
 	sprite(std::nullopt),
 	shouldRemove(false),
 	maxHealth(),
 	currentHealth(),
 	collision(false),
-	animation(std::move(animation))
+	animation(nullptr)
 {
 }
 

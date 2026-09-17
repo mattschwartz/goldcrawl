@@ -15,25 +15,6 @@ void WorldScene::handleInput(const Input& input)
 
 void WorldScene::update(Uint64 delta)
 {
-	// update the world
-	//auto offs = controller->getMapOffset();
-	//for (auto& layer : SortedTileLayers)
-	//{
-	//	for (auto& [position, tile] : controller->getMap()->getTiles(layer))
-	//	{
-	//		int x = (position.x * TILE_SIZE) - (int)offs.x;
-	//		int y = (position.y * TILE_SIZE) - (int)offs.y;
-
-	//		// only update what's in view, plus the transition scenes
-	//		if (x < -TILE_SIZE || x > SCREEN_WIDTH + TILE_SIZE
-	//			|| y < -TILE_SIZE || y > SCREEN_HEIGHT + TILE_SIZE)
-	//		{
-	//			continue;
-	//		}
-	//		tile->update(delta);
-	//	}
-	//}
-	// update the player
 	controller->update(delta);
 }
 
@@ -69,7 +50,16 @@ void WorldScene::renderMap(const Renderer& renderer) const
 			if (tile->getCurrentHealth() != tile->getMaxHealth())
 			{
 				renderer.drawBox({ x, y + TILE_SIZE, TILE_SIZE, 2 }, colors::darkest, true);
-				renderer.drawBox({ x, y + TILE_SIZE, (int)(TILE_SIZE * tile->getCurrentHealth() / tile->getMaxHealth()), 2}, colors::base, true);
+				renderer.drawBox({ x, y + TILE_SIZE, (int)(TILE_SIZE * tile->getCurrentHealth() / tile->getMaxHealth()), 2 }, colors::base, true);
+			}
+
+			if (controller->getTargetedTile() && controller->getTargetedTile() == tile.get())
+			{
+				static auto promptButton = Sprite{ "Sprites/interact_prompt_button.png", SDL_Rect{0,0,16,20} };
+				renderer.drawSprite(promptButton, {
+					x, y - 16,
+					TILE_SIZE, 20
+					});
 			}
 		}
 	}
@@ -88,15 +78,13 @@ void WorldScene::renderPlayer(const Renderer& renderer) const
 	reticle.x -= controller->getMapOffset().x;
 	reticle.y -= controller->getMapOffset().y;
 
-	renderer.drawSprite(player->getSprite(), {(int)x, (int)y, TILE_SIZE, TILE_SIZE});
+	renderer.drawSprite(player->getSprite(), { (int)x, (int)y, TILE_SIZE, TILE_SIZE });
 
 	auto broomPosition = player->getBroom()->getPosition();
 	broomPosition.x -= controller->getMapOffset().x;
 	broomPosition.y -= controller->getMapOffset().y;
 
 	renderer.drawSprite(player->getBroom()->getSprite(), broomPosition);
-
-	//renderer.drawBox({ (int)reticle.x, (int)reticle.y, TILE_SIZE, TILE_SIZE }, colors::base);
 }
 
 void WorldScene::renderToolbar(const Renderer& renderer) const

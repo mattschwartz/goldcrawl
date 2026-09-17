@@ -21,6 +21,7 @@ public:
 
 	void setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile);
 	bool hasCollision(int x, int y) const;
+	std::shared_ptr<Tile> getInteractable(int x, int y) const;
 
 	void update(Uint64 deltaMillis);
 
@@ -28,4 +29,5 @@ private:
 	// tiles
 	std::unordered_map<TileLayer, Tilemap> tilesByLayer;
 	Tilemap collisionTiles;
+	Tilemap interactableTiles;
 };

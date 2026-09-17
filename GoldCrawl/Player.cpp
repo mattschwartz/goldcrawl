@@ -50,21 +50,25 @@ void Player::setDirection(Vector direction)
 	}
 	if (direction.x > 0)
 	{
+		facing = { 1,0 };
 		animation->setCycle("walk_right");
 		return;
 	}
 	if (direction.x < 0)
 	{
+		facing = { -1,0 };
 		animation->setCycle("walk_left");
 		return;
 	}
 	if ( direction.y > 0)
 	{
+		facing = { 0, 1 };
 		animation->setCycle("walk_down");
 		return;
 	}
 	if (direction.y < 0)
 	{
+		facing = { 0, -1 };
 		animation->setCycle("walk_up");
 		return;
 	}

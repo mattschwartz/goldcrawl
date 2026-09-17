@@ -11,6 +11,7 @@ class WorldPlayerController : public PlayerController
 public:
 	WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap);
 
+	Tile* getTargetedTile() const;
 	Map* getMap() const { return currentMap.get(); }
 	Vector getMapOffset() const { return mapOffset; }
 
@@ -18,6 +19,7 @@ public:
 	void update(Uint64 deltaMillis) override;
 
 private:
+	std::weak_ptr<Tile> targetedTile;
 	std::unique_ptr<Map> currentMap;
 	Vector mapOffset;
 	Vector transitioningToMapOffset;
@@ -25,4 +27,6 @@ private:
 	long transitionDurationMillis;
 
 	bool canMove(Vector& newPosition) const;
+	// based on where the player is and is facing, is there anything to interact with
+	bool testInteractables();
 };

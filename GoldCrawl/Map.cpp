@@ -41,12 +41,26 @@ void Map::setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile)
 	{
 		collisionTiles.emplace(Point{ x,y }, tile);
 	}
+	if (tile->isInteractable())
+	{
+		interactableTiles.emplace(Point{ x,y }, tile);
+	}
 	tilesByLayer[layer].emplace(Point{ x,y }, std::move(tile));
 }
 
 bool Map::hasCollision(int x, int y) const
 {
 	return collisionTiles.find(Point{ x,y }) != collisionTiles.end();
+}
+
+std::shared_ptr<Tile> Map::getInteractable(int x, int y) const
+{
+	if (auto it = interactableTiles.find(Point{ x,y }); it != interactableTiles.end())
+	{
+		if (it->second->isInteractable()) return it->second;
+		else return nullptr;
+	}
+	return nullptr;
 }
 
 void Map::update(Uint64 deltaMillis)
