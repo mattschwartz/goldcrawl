@@ -2,6 +2,7 @@
 
 #include "Prelude.h"
 #include "SpriteAnimation.h"
+#include "Point.h"
 
 enum class TileLayer
 {
@@ -62,6 +63,7 @@ public:
 protected:
 	std::optional<Sprite> sprite;
 	std::unique_ptr<SpriteAnimation> animation;
+	Point position; // ugh
 
 private:
 	bool shouldRemove;

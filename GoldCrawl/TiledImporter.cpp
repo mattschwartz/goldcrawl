@@ -72,6 +72,7 @@ std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
                         tile->sprite = tt->image.substr(3);
                     }
 
+                    tile->position = { tileX, tileY };
                     tile->setCollision(tt->hasCollision());
                     tile->maxHealth = tile->currentHealth = tt->getHealth();
                     map->setTile(layer, tileX, tileY, tile);

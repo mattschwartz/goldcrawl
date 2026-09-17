@@ -81,6 +81,9 @@
     <ClCompile Include="TrapTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="dependencies\SDL2.dll">
@@ -159,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="TrapTile.h">
       <Filter>Header Files\map</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationManager.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
