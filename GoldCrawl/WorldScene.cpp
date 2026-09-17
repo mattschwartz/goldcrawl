@@ -66,7 +66,7 @@ void WorldScene::renderMap(const Renderer& renderer) const
 				y,
 				TILE_SIZE,
 				TILE_SIZE });
-			if (tile->getMaxHealth() > 0)
+			if (tile->getCurrentHealth() != tile->getMaxHealth())
 			{
 				renderer.drawBox({ x, y + TILE_SIZE, TILE_SIZE, 2 }, colors::darkest, true);
 				renderer.drawBox({ x, y + TILE_SIZE, (int)(TILE_SIZE * tile->getCurrentHealth() / tile->getMaxHealth()), 2}, colors::base, true);
