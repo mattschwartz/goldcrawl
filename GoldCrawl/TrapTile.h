@@ -10,7 +10,7 @@ public:
 	bool isInteractable() const override { return !trapSet; }
 
 	// will reset the trap
-	void interact() override;
+	void interact(class Player&) override;
 
 private:
 	// the sprite to show when the trap is set

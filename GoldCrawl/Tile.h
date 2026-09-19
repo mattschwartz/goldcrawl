@@ -54,7 +54,7 @@ public:
 
 	const Sprite& getSprite() const;
 
-	virtual void interact() {} // player interacts with this tile
+	virtual void interact(class Player& player) {} // player interacts with this tile
 	virtual void clean() {} // broom hits this tile
 	virtual void update(Uint64 delta); // todo - like animations
 

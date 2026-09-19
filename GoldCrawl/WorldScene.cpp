@@ -1,4 +1,5 @@
 #include "WorldScene.h"
+#include <format>
 #include "Color.h"
 
 WorldScene::WorldScene(std::unique_ptr<Map> currentMap)
@@ -113,7 +114,9 @@ void WorldScene::renderToolbar(const Renderer& renderer) const
 	static auto gemSprite = Sprite{ "Sprites/clean_gem.png" };
 
 	renderer.drawSprite(toolbarSprite, { x, y, SCREEN_WIDTH, TILE_SIZE });
-	renderer.drawText("00499", x + 25, y + 1, colors::darkest);
+	// https://stackoverflow.com/questions/530614/print-leading-zeros-with-c-output-operator
+	std::string coinText = std::format("{:05}", controller->getPlayer()->getGold());
+	renderer.drawText(coinText, x + 25, y + 1, colors::darkest);
 
 	int gemX = 100, gemY = y + 6;
 	for (int i = 0; i < numCleanGems; ++i, gemX += 6)

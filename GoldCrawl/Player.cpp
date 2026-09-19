@@ -1,6 +1,7 @@
 #include "Player.h"
 
 Player::Player() :
+	gold(0),
 	position({ 16, 16 }),
 	direction(),
 	sprite(Sprite{ "Sprites/charlie.png" }),

@@ -6,7 +6,7 @@ class LootTile : public Tile
 {
 public:
 	bool isInteractable() const override { return true; }
-	void interact() override;
+	void interact(class Player& player) override;
 
 private:
 

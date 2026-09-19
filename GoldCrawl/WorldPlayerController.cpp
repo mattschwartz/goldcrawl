@@ -55,7 +55,7 @@ void WorldPlayerController::handleInput(const Input& input)
 	{
 		if (auto lock = targetedTile.lock())
 		{
-			lock->interact();
+			lock->interact(*getPlayer());
 		}
 	}
 

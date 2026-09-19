@@ -12,6 +12,9 @@ class Player
 public:
 	Player();
 
+	int getGold() const { return gold; }
+	void addGold(int amt) { gold += amt; }
+
 	const Sprite& getSprite() const;
 	Broom* getBroom() const { return broom.get(); }
 
@@ -29,6 +32,8 @@ public:
 	void setPosition(Vector position) { this->position = position; }
 
 private:
+	int gold;
+
 	Vector position;
 	Vector direction;
 	// doesn't change when player isn't moving, unlike

@@ -1,7 +1,7 @@
 #include "TrapTile.h"
 #include "AnimationManager.h"
 
-void TrapTile::interact()
+void TrapTile::interact(class Player&)
 {
 	if (trapSet) return;
 
