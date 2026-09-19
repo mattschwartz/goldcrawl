@@ -26,7 +26,7 @@ void Broom::sweepBroom(Vector center, Map* map)
 			auto tiles = map->getTilesAt(x + i, y + j);
 			for (auto& t : tiles)
 			{
-				if (t->getMaxHealth() > 0)
+				if (t->isCleanable() && t->getMaxHealth() > 0)
 				{
 					t->takeDamage(CLEAN_DAMAGE);
 					// only report clean when the tile is fully clean

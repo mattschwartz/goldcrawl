@@ -61,6 +61,11 @@ std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
                     {
                         tile = std::make_shared<LootTile>();
                     }
+                    else if (interaction == "clean")
+                    {
+                        tile = std::make_shared<Tile>();
+                        tile->cleanable = true;
+                    }
                     else // default tile
                     {
                         tile = std::make_shared<Tile>();

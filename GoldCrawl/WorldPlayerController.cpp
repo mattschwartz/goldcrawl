@@ -56,6 +56,11 @@ void WorldPlayerController::handleInput(const Input& input)
 		if (auto lock = targetedTile.lock())
 		{
 			lock->interact(*getPlayer());
+			// hacky, traps contribute to dirty health tho
+			if (lock->getMaxHealth())
+			{
+				getMap()->addCleanDamage(lock->getMaxHealth());
+			}
 		}
 	}
 

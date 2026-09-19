@@ -42,6 +42,7 @@ class Tile
 public:
 	Tile();
 
+	bool isCleanable() const { return cleanable; }
 	virtual bool isInteractable() const { return false; }
 
 	bool hasCollision() const { return collision; }
@@ -63,6 +64,7 @@ public:
 
 protected:
 	bool shouldRemove;
+	bool cleanable;
 	std::optional<Sprite> sprite;
 	std::unique_ptr<SpriteAnimation> animation;
 	Point position; // ugh

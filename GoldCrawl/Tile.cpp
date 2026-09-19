@@ -1,6 +1,7 @@
 #include "Tile.h"
 
 Tile::Tile() :
+	cleanable(false),
 	position(),
 	sprite(std::nullopt),
 	shouldRemove(false),
