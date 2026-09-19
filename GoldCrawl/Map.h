@@ -4,6 +4,8 @@
 #include "Tile.h"
 #include "Vector.h"
 #include "Point.h"
+#include "Portal.h"
+#include "POI.h"
 
 class Map
 {
@@ -27,6 +29,12 @@ public:
 	bool hasCollision(int x, int y) const;
 	std::shared_ptr<Tile> getInteractable(int x, int y) const;
 
+	void addPortal(std::shared_ptr<Portal> portal);
+	Portal* getPortal(Vector position);
+
+	void addPointOfInterest(std::shared_ptr<POI> poi);
+	POI* getPointOfInterest(const std::string& poiName);
+
 	void update(Uint64 deltaMillis);
 
 private:
@@ -40,4 +48,6 @@ private:
 	std::unordered_map<TileLayer, Tilemap> tilesByLayer;
 	Tilemap collisionTiles;
 	Tilemap interactableTiles;
+	std::vector<std::shared_ptr<Portal>> portals;
+	std::vector<std::shared_ptr<POI>> pointsOfInterest;
 };

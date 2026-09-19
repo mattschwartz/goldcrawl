@@ -3,7 +3,7 @@
  "name":"goldcrawl_tileset",
  "objectalignment":"topleft",
  "spacing":0,
- "tilecount":34,
+ "tilecount":50,
  "tiledversion":"1.12.1",
  "tileheight":16,
  "tiles":[
@@ -119,13 +119,13 @@
          "id":12,
          "image":"..\/Sprites\/bush_1.png",
          "imageheight":16,
-         "imagewidth":16
-        }, 
-        {
-         "id":13,
-         "image":"..\/Sprites\/charlie.png",
-         "imageheight":16,
-         "imagewidth":16
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
         }, 
         {
          "id":14,
@@ -338,6 +338,186 @@
         {
          "id":35,
          "image":"..\/Sprites\/tile_2_door.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":36,
+         "image":"..\/Sprites\/wood_wall.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":37,
+         "image":"..\/Sprites\/shingle_roof.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":39,
+         "image":"..\/Sprites\/cobblestone_path_light.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":40,
+         "image":"..\/Sprites\/wooden_door.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":41,
+         "image":"..\/Sprites\/wood_wall_left.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":42,
+         "image":"..\/Sprites\/wood_wall_right.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":43,
+         "image":"..\/Sprites\/wooden_window.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":44,
+         "image":"..\/Sprites\/wooden_interior_bottom_right.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":45,
+         "image":"..\/Sprites\/wooden_interior_right.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":46,
+         "image":"..\/Sprites\/wooden_interior_top_right.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":47,
+         "image":"..\/Sprites\/wooden_interior_top.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":48,
+         "image":"..\/Sprites\/wooden_interior_top_left.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":49,
+         "image":"..\/Sprites\/wooden_interior_left.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":50,
+         "image":"..\/Sprites\/wooden_interior_bottom_left.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":51,
+         "image":"..\/Sprites\/wooden_interior_bottom.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":52,
+         "image":"..\/Sprites\/wooden_interior_door_bottom.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":53,
+         "image":"..\/Sprites\/wooden_floor.png",
          "imageheight":16,
          "imagewidth":16
         }],

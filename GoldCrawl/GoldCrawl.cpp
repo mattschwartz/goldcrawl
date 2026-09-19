@@ -32,7 +32,7 @@ static bool tick(Director& director, Input& input, Renderer& renderer)
 int main(int argc, char* args[])
 {
 	TiledImporter imp{};
-	auto starterMap = imp.parseTiledMap("Maps/dirty_dungeon_1.tmj");
+	auto starterMap = imp.parseTiledMap("Maps/overworld.tmj");
 
 	try
 	{

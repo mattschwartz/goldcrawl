@@ -64,6 +64,47 @@ std::shared_ptr<Tile> Map::getInteractable(int x, int y) const
 	return nullptr;
 }
 
+void Map::addPortal(std::shared_ptr<Portal> portal)
+{
+	portals.push_back(std::move(portal));
+}
+
+Portal* Map::getPortal(Vector position)
+{
+	const auto isCollision = [](float x, float y, SDL_Rect bounds) -> bool {
+		return x < bounds.x + bounds.w &&
+			x + TILE_SIZE > bounds.x &&
+			y < bounds.y + bounds.h &&
+			y + TILE_SIZE > bounds.y;
+		};
+
+	for (auto& portal : portals)
+	{
+		if (isCollision(position.x, position.y, portal->bounds))
+		{
+			return portal.get();
+		}
+	}
+	return nullptr;
+}
+
+void Map::addPointOfInterest(std::shared_ptr<POI> poi)
+{
+	pointsOfInterest.push_back(std::move(poi));
+}
+
+POI* Map::getPointOfInterest(const std::string& poiName)
+{
+	for (auto& poi : pointsOfInterest)
+	{
+		if (poi->name == poiName)
+		{
+			return poi.get();
+		}
+	}
+	return nullptr;
+}
+
 void Map::update(Uint64 deltaMillis)
 {
 	for (auto& [_, tiles] : tilesByLayer)

@@ -172,5 +172,11 @@
     <ClInclude Include="LootTile.h">
       <Filter>Header Files\map</Filter>
     </ClInclude>
+    <ClInclude Include="POI.h">
+      <Filter>Header Files\map</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Header Files\map</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

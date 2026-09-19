@@ -205,7 +205,9 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="POI.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="Prelude.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />

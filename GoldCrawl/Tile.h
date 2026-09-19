@@ -53,6 +53,7 @@ public:
 	// returns how much damage was actually taken (factors in overkill)
 	float takeDamage(float cleanDamage);
 
+	bool hasSprite() const;
 	const Sprite& getSprite() const;
 
 	virtual void interact(class Player& player) {} // player interacts with this tile

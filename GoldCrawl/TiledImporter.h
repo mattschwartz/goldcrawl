@@ -76,5 +76,7 @@ public:
 	std::unique_ptr<Map> parseTiledMap(const std::string& filepath);
 
 private:
+	void parseTileLayer(const nlohmann::json& j, Map& map, tiled::Tileset& tileset);
+	void parseObjectLayer(const nlohmann::json& j, Map& map);
 	std::unique_ptr<tiled::Tileset> parseTileset(const std::string& filepath);
 };

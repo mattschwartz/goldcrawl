@@ -20,6 +20,11 @@ float Tile::takeDamage(float cleanDamage)
 	return previousHealth - currentHealth;
 }
 
+bool Tile::hasSprite() const
+{
+	return sprite.has_value() || animation;
+}
+
 const Sprite& Tile::getSprite() const
 {
 	if (sprite.has_value())

@@ -1,0 +1,163 @@
+{ "compressionlevel":-1,
+ "editorsettings":
+    {
+     "chunksize":
+        {
+         "height":8,
+         "width":10
+        }
+    },
+ "height":8,
+ "infinite":true,
+ "layers":[
+        {
+         "chunks":[
+                {
+                 "data":[22, 22, 22, 38, 38, 38, 38, 22, 22, 22,
+                    22, 22, 22, 42, 41, 44, 43, 22, 22, 22,
+                    40, 40, 40, 40, 40, 40, 40, 40, 40, 40,
+                    40, 40, 40, 40, 40, 40, 40, 40, 40, 40,
+                    22, 22, 22, 22, 40, 40, 22, 22, 22, 22,
+                    22, 22, 22, 22, 40, 40, 22, 22, 22, 22,
+                    22, 22, 22, 22, 40, 40, 22, 22, 22, 22,
+                    22, 22, 22, 22, 40, 40, 22, 22, 22, 22],
+                 "height":8,
+                 "width":10,
+                 "x":0,
+                 "y":0
+                }],
+         "height":16,
+         "id":1,
+         "name":"ground",
+         "opacity":1,
+         "startx":0,
+         "starty":0,
+         "type":"tilelayer",
+         "visible":true,
+         "width":16,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":4,
+         "name":"objects",
+         "objects":[
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"player_spawn",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":25.0909090909091,
+                 "y":40.1818181818182
+                }, 
+                {
+                 "height":0,
+                 "id":7,
+                 "name":"info_house_exit",
+                 "opacity":1,
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":71.8181818181818,
+                 "y":34
+                }, 
+                {
+                 "height":6.90909090909091,
+                 "id":9,
+                 "name":"portal to info house",
+                 "opacity":1,
+                 "properties":[
+                        {
+                         "name":"destination_map",
+                         "type":"string",
+                         "value":"info_house_map"
+                        }, 
+                        {
+                         "name":"spawn_poi",
+                         "type":"string",
+                         "value":"entrance"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"portal"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":17.4545454545454,
+                 "x":63.4545454545455,
+                 "y":11.4545454545455
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "chunks":[
+                {
+                 "data":[0, 0, 13, 0, 0, 0, 0, 13, 0, 0,
+                    13, 13, 13, 0, 0, 0, 0, 13, 13, 13,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    13, 13, 13, 13, 0, 0, 13, 13, 13, 13,
+                    0, 0, 0, 13, 0, 0, 13, 0, 0, 0,
+                    0, 0, 0, 13, 0, 0, 13, 0, 0, 0,
+                    0, 0, 0, 13, 0, 0, 13, 0, 0, 0],
+                 "height":8,
+                 "width":10,
+                 "x":0,
+                 "y":0
+                }, 
+                {
+                 "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    13, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 "height":8,
+                 "width":10,
+                 "x":10,
+                 "y":0
+                }],
+         "height":16,
+         "id":2,
+         "name":"entities",
+         "opacity":1,
+         "startx":0,
+         "starty":0,
+         "type":"tilelayer",
+         "visible":true,
+         "width":16,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":5,
+ "nextobjectid":10,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tiledversion":"1.12.1",
+ "tileheight":16,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "source":"goldcrawl_tileset.tsj"
+        }],
+ "tilewidth":16,
+ "type":"map",
+ "version":"1.10",
+ "width":10
+}

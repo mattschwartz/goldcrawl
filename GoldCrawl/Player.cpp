@@ -2,7 +2,8 @@
 
 Player::Player() :
 	gold(0),
-	position({ 16, 16 }),
+	position({ 32, 32 }),
+	facing(),
 	direction(),
 	sprite(Sprite{ "Sprites/charlie.png" }),
 	broom(std::make_unique<Broom>()),

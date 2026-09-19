@@ -11,6 +11,8 @@ class WorldPlayerController : public PlayerController
 public:
 	WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap);
 
+	bool shouldShowDirtMarkers() const { return showDirtMarkers; }
+
 	Tile* getTargetedTile() const;
 	Map* getMap() const { return currentMap.get(); }
 	Vector getMapOffset() const { return mapOffset; }
@@ -25,8 +27,10 @@ private:
 	Vector transitioningToMapOffset;
 	bool sceneTransitioning;
 	long transitionDurationMillis;
+	bool showDirtMarkers;
 
 	bool canMove(Vector& newPosition) const;
+	bool enterPortal();
 	// based on where the player is and is facing, is there anything to interact with
 	bool testInteractables();
 };

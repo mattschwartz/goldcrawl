@@ -1,5 +1,6 @@
 #include "WorldPlayerController.h"
 #include "Broom.h"
+#include "TiledImporter.h"
 
 // pixels per second
 constexpr auto SPEED = 64;
@@ -8,6 +9,7 @@ constexpr auto DIAGONAL_SPEED = 64 * 0.75;
 
 WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap) :
 	PlayerController(std::move(player)),
+	showDirtMarkers(false),
 	currentMap(std::move(currentMap)),
 	mapOffset(),
 	transitioningToMapOffset(),
@@ -62,6 +64,10 @@ void WorldPlayerController::handleInput(const Input& input)
 				getMap()->addCleanDamage(lock->getMaxHealth());
 			}
 		}
+	}
+	if (input.isBindingPressed(KeyBinding::Select))
+	{
+		showDirtMarkers = !showDirtMarkers;
 	}
 
 	getPlayer()->setDirection(playerDirection);
@@ -136,6 +142,11 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 	getPlayer()->update(deltaMillis);
 	getMap()->update(deltaMillis);
 
+	if (enterPortal())
+	{
+		return;
+	}
+
 	testInteractables();
 
 	// can't move through walls
@@ -200,9 +211,9 @@ bool WorldPlayerController::canMove(Vector& newPosition) const
 	// making the player slightly smaller so that it doesn't get clipped on
 	// exact pixels
 	const auto isCollision = [](float x, float y, SDL_Rect bounds) -> bool {
-		return (x + 1) < bounds.x + bounds.w &&
-			(x - 2 + TILE_SIZE) > bounds.x &&
-			(y + 1) < bounds.y + bounds.h &&
+		return (x + 2) < bounds.x + bounds.w &&
+			(x - 4 + TILE_SIZE) > bounds.x &&
+			(y + 2) < bounds.y + bounds.h &&
 			(y - 2 + TILE_SIZE) > bounds.y;
 		};
 	const auto anyCollision = [collidingBounds, isCollision](Vector position) -> bool {
@@ -233,6 +244,24 @@ bool WorldPlayerController::canMove(Vector& newPosition) const
 		}
 	}
 
+	return false;
+}
+
+bool WorldPlayerController::enterPortal()
+{
+	if (auto portal = getMap()->getPortal(getPlayer()->getPosition()))
+	{
+		TiledImporter imp{};
+		auto newMap = imp.parseTiledMap(portal->destinationMap);
+		auto spawnPoi = newMap->getPointOfInterest(portal->destinationPoi);
+		Vector newPosition{
+			spawnPoi->position.x - TILE_SIZE / 2,
+			spawnPoi->position.y - TILE_SIZE / 2
+		};
+		getPlayer()->setPosition(newPosition);
+		currentMap = std::move(newMap);
+		return true;
+	}
 	return false;
 }
 

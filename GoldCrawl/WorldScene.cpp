@@ -46,11 +46,21 @@ void WorldScene::renderMap(const Renderer& renderer) const
 				continue;
 			}
 
+			if (!tile->hasSprite()) continue;
+
 			renderer.drawSprite(tile->getSprite(), {
 				x,
 				y,
 				TILE_SIZE,
 				TILE_SIZE });
+			if (tile->isCleanable())
+			{
+				if (controller->shouldShowDirtMarkers())
+				{
+					static auto markerSprite = Sprite{ "Sprites/dirty_tile_marker.png" };
+					renderer.drawSprite(markerSprite, { x, y, TILE_SIZE, TILE_SIZE });
+				}
+			}
 			if (tile->getCurrentHealth() != tile->getMaxHealth())
 			{
 				renderer.drawBox({ x, y + TILE_SIZE - 2, TILE_SIZE, 2 }, colors::darkest, true);
@@ -106,7 +116,7 @@ void WorldScene::renderToolbar(const Renderer& renderer) const
 	float clean = map->getCleanDamage();
 	float dirt = map->getTotalDirtLevel();
 
-	float cleanPercent = std::min(map->getCleanDamage() / map->getTotalDirtLevel(), 1.0f);
+	float cleanPercent = dirt == 0 ? 1 : std::min(clean / dirt, 1.0f);
 	int numCleanGems = (int)(cleanPercent * 10.0f);
 
 	int x = 0, y = 144 - 16;
