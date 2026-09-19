@@ -87,6 +87,9 @@
     <ClCompile Include="LootTile.cpp">
       <Filter>Source Files\map</Filter>
     </ClCompile>
+    <ClCompile Include="MapTransitionScene.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="dependencies\SDL2.dll">
@@ -177,6 +180,9 @@
     </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Header Files\map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTransitionScene.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

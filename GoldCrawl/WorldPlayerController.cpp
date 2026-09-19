@@ -9,6 +9,7 @@ constexpr auto DIAGONAL_SPEED = 64 * 0.75;
 
 WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap) :
 	PlayerController(std::move(player)),
+	isLoadingNewMap(false),
 	showDirtMarkers(false),
 	currentMap(std::move(currentMap)),
 	mapOffset(),
@@ -16,6 +17,14 @@ WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std
 	sceneTransitioning(false),
 	transitionDurationMillis(0)
 {
+}
+
+void WorldPlayerController::switchToLoadingMap()
+{
+	currentMap = std::move(loadingMap);
+	loadingMap.reset();
+	getPlayer()->setPosition(newPlayerPosition);
+	isLoadingNewMap = false;
 }
 
 Tile* WorldPlayerController::getTargetedTile() const
@@ -29,7 +38,7 @@ Tile* WorldPlayerController::getTargetedTile() const
 
 void WorldPlayerController::handleInput(const Input& input)
 {
-	if (sceneTransitioning) return;
+	if (sceneTransitioning || isLoadingNewMap) return;
 
 	Vector playerDirection{ 0,0 };
 
@@ -75,6 +84,8 @@ void WorldPlayerController::handleInput(const Input& input)
 
 void WorldPlayerController::update(Uint64 deltaMillis)
 {
+	if (isLoadingNewMap) return;
+
 	if (sceneTransitioning)
 	{
 		float deltaSec = deltaMillis / 1000.0 + 0.00001;
@@ -258,8 +269,11 @@ bool WorldPlayerController::enterPortal()
 			spawnPoi->position.x - TILE_SIZE / 2,
 			spawnPoi->position.y - TILE_SIZE / 2
 		};
-		getPlayer()->setPosition(newPosition);
-		currentMap = std::move(newMap);
+
+		newPlayerPosition = newPosition;
+		loadingMap = std::move(newMap);
+		isLoadingNewMap = true;
+
 		return true;
 	}
 	return false;

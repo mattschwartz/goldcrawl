@@ -2,11 +2,12 @@
 #include <format>
 #include "Color.h"
 
-WorldScene::WorldScene(std::unique_ptr<Map> currentMap)
+WorldScene::WorldScene(std::unique_ptr<Map> currentMap) : isFadingOutScene(false), isFadingInScene(false)
 {
 	controller = std::make_unique<WorldPlayerController>(
 		std::make_unique<Player>(),
 		std::move(currentMap));
+	transitionScene = std::make_unique<MapTransitionScene>();
 }
 
 void WorldScene::handleInput(const Input& input)
@@ -16,7 +17,36 @@ void WorldScene::handleInput(const Input& input)
 
 void WorldScene::update(Uint64 delta)
 {
+	if (isFadingOutScene)
+	{
+		transitionScene->update(delta);
+		if (transitionScene->isComplete())
+		{
+			controller->switchToLoadingMap();
+			transitionScene->startFadeIn();
+			isFadingOutScene = false;
+			isFadingInScene = true;
+		}
+		return;
+	}
+	else if (isFadingInScene)
+	{
+		transitionScene->update(delta);
+		if (transitionScene->isComplete())
+		{
+			isFadingInScene = false;
+		}
+		return;
+	}
+
 	controller->update(delta);
+	// new map to load, start sequence
+	if (controller->isLoadingNewMap)
+	{
+		SDL_Log("Loading new map");
+		transitionScene->startFadeOut();
+		isFadingOutScene = true;
+	}
 }
 
 void WorldScene::render(const Renderer& renderer) const
@@ -24,6 +54,11 @@ void WorldScene::render(const Renderer& renderer) const
 	renderMap(renderer);
 	renderPlayer(renderer);
 	renderToolbar(renderer);
+
+	if (isFadingOutScene || isFadingInScene)
+	{
+		transitionScene->render(renderer);
+	}
 }
 
 void WorldScene::renderMap(const Renderer& renderer) const

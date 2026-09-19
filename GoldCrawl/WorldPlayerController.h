@@ -9,9 +9,12 @@ constexpr auto TRANSITION_DURATION = 1000;
 class WorldPlayerController : public PlayerController
 {
 public:
+	bool isLoadingNewMap;
+
 	WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap);
 
 	bool shouldShowDirtMarkers() const { return showDirtMarkers; }
+	void switchToLoadingMap();
 
 	Tile* getTargetedTile() const;
 	Map* getMap() const { return currentMap.get(); }
@@ -28,6 +31,9 @@ private:
 	bool sceneTransitioning;
 	long transitionDurationMillis;
 	bool showDirtMarkers;
+
+	Vector newPlayerPosition;
+	std::unique_ptr<Map> loadingMap;
 
 	bool canMove(Vector& newPosition) const;
 	bool enterPortal();
