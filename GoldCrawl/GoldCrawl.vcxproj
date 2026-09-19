@@ -166,6 +166,7 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClCompile Include="Director.cpp" />
     <ClCompile Include="GoldCrawl.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LootTile.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -200,6 +201,7 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClInclude Include="Director.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="LootTile.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerController.h" />

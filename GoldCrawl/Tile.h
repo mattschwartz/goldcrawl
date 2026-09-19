@@ -61,12 +61,12 @@ public:
 	friend class Map;
 
 protected:
+	bool shouldRemove;
 	std::optional<Sprite> sprite;
 	std::unique_ptr<SpriteAnimation> animation;
 	Point position; // ugh
 
 private:
-	bool shouldRemove;
 	bool collision;
 	// represents how dirty the tile is. 0.0 = clean, broom deals clean damage aginst debris
 	float maxHealth;

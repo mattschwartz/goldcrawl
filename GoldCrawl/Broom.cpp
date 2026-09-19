@@ -1,7 +1,7 @@
 #include "Broom.h"
 
 // todo - balance
-constexpr float CLEAN_DAMAGE = 6.5;
+constexpr float CLEAN_DAMAGE = 8;
 
 Broom::Broom() :
 	renderPosition({ 0,0,48,48 }),

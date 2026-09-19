@@ -11,9 +11,7 @@ Player::Player() :
 
 const Sprite& Player::getSprite() const
 {
-	// todo - factor in animations and facing
 	return animation->getSprite();
-	//return sprite;
 }
 
 void Player::update(Uint64 deltaMillis)

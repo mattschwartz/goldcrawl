@@ -49,8 +49,8 @@ void WorldScene::renderMap(const Renderer& renderer) const
 				TILE_SIZE });
 			if (tile->getCurrentHealth() != tile->getMaxHealth())
 			{
-				renderer.drawBox({ x, y + TILE_SIZE, TILE_SIZE, 2 }, colors::darkest, true);
-				renderer.drawBox({ x, y + TILE_SIZE, (int)(TILE_SIZE * tile->getCurrentHealth() / tile->getMaxHealth()), 2 }, colors::base, true);
+				renderer.drawBox({ x, y + TILE_SIZE - 2, TILE_SIZE, 2 }, colors::darkest, true);
+				renderer.drawBox({ x, y + TILE_SIZE - 2, (int)(TILE_SIZE * tile->getCurrentHealth() / tile->getMaxHealth()), 2 }, colors::base, true);
 			}
 
 			if (controller->getTargetedTile() && controller->getTargetedTile() == tile.get())

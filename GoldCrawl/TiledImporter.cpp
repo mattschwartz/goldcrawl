@@ -3,6 +3,7 @@
 #include <nlohmann/json.hpp>
 #include "FileSystem.h"
 #include "TrapTile.h"
+#include "LootTile.h"
 
 using namespace nlohmann;
 
@@ -55,6 +56,10 @@ std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
                     {
                         std::string spriteName = tt->getStringProp("trap_set_sprite").value_or("");
                         tile = std::make_shared<TrapTile>("Sprites/" + spriteName);
+                    }
+                    else if (interaction == "loot_tile")
+                    {
+                        tile = std::make_shared<LootTile>();
                     }
                     else // default tile
                     {

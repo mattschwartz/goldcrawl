@@ -127,7 +127,18 @@
          "id":15,
          "image":"..\/Sprites\/chest-open.png",
          "imageheight":16,
-         "imagewidth":16
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"interaction",
+                 "type":"string",
+                 "value":"reset_trap"
+                }, 
+                {
+                 "name":"trap_set_sprite",
+                 "type":"string",
+                 "value":"chest.png"
+                }]
         }, 
         {
          "id":16,
@@ -181,7 +192,13 @@
          "id":23,
          "image":"..\/Sprites\/grave.png",
          "imageheight":16,
-         "imagewidth":16
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"interaction",
+                 "type":"string",
+                 "value":"loot_tile"
+                }]
         }, 
         {
          "id":24,

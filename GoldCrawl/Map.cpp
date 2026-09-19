@@ -79,6 +79,7 @@ void Map::update(Uint64 deltaMillis)
 		}
 		for (auto& t : toRemove)
 		{
+			interactableTiles.erase(t);
 			tiles.erase(t);
 		}
 	}
