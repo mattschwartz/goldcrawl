@@ -3,7 +3,6 @@
 
 constexpr int DURATION_MILLIS = 333;
 
-
 void MapTransitionScene::startFadeIn()
 {
 	opacity = 0;
