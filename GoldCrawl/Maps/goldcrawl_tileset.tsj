@@ -3,7 +3,7 @@
  "name":"goldcrawl_tileset",
  "objectalignment":"topleft",
  "spacing":0,
- "tilecount":50,
+ "tilecount":60,
  "tiledversion":"1.12.1",
  "tileheight":16,
  "tiles":[
@@ -520,6 +520,120 @@
          "image":"..\/Sprites\/wooden_floor.png",
          "imageheight":16,
          "imagewidth":16
+        }, 
+        {
+         "id":54,
+         "image":"..\/Sprites\/temple_top_left.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":55,
+         "image":"..\/Sprites\/temple_top.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":56,
+         "image":"..\/Sprites\/temple_top_right.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":57,
+         "image":"..\/Sprites\/temple_right.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":58,
+         "image":"..\/Sprites\/temple_bottom_right.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":59,
+         "image":"..\/Sprites\/temple_bottom_left.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":60,
+         "image":"..\/Sprites\/temple_bottom.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":61,
+         "image":"..\/Sprites\/temple_left.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
+        }, 
+        {
+         "id":62,
+         "image":"..\/Sprites\/temple_top_door.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":63,
+         "image":"..\/Sprites\/black_collider.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }]
         }],
  "tilewidth":16,
  "type":"tileset",

@@ -11,6 +11,7 @@ WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std
 	PlayerController(std::move(player)),
 	isLoadingNewMap(false),
 	showDirtMarkers(false),
+	newPlayerPosition(),
 	currentMap(std::move(currentMap)),
 	mapOffset(),
 	transitioningToMapOffset(),
@@ -24,6 +25,9 @@ void WorldPlayerController::switchToLoadingMap()
 	currentMap = std::move(loadingMap);
 	loadingMap.reset();
 	getPlayer()->setPosition(newPlayerPosition);
+	mapOffset.x = (int)(newPlayerPosition.x / SCREEN_WIDTH) * SCREEN_WIDTH;
+	mapOffset.y = (int)(newPlayerPosition.y / SCREEN_HEIGHT) * SCREEN_HEIGHT;
+	transitioningToMapOffset = mapOffset;
 	isLoadingNewMap = false;
 }
 
@@ -74,9 +78,13 @@ void WorldPlayerController::handleInput(const Input& input)
 			}
 		}
 	}
-	if (input.isBindingPressed(KeyBinding::Select))
+	if (input.isBindingDown(KeyBinding::Select))
 	{
-		showDirtMarkers = !showDirtMarkers;
+		showDirtMarkers = true;
+	}
+	else
+	{
+		showDirtMarkers = false;
 	}
 
 	getPlayer()->setDirection(playerDirection);
