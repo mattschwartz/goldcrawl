@@ -1,6 +1,7 @@
 #include "Tile.h"
 
 Tile::Tile() :
+	position(),
 	sprite(std::nullopt),
 	shouldRemove(false),
 	maxHealth(),
@@ -10,10 +11,12 @@ Tile::Tile() :
 {
 }
 
-void Tile::takeDamage(float cleanDamage)
+float Tile::takeDamage(float cleanDamage)
 {
+	float previousHealth = currentHealth;
 	currentHealth = std::max(currentHealth - cleanDamage, 0.f);
 	shouldRemove = currentHealth == 0.0;
+	return previousHealth - currentHealth;
 }
 
 const Sprite& Tile::getSprite() const

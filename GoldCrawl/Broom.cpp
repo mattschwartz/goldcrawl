@@ -29,6 +29,11 @@ void Broom::sweepBroom(Vector center, Map* map)
 				if (t->getMaxHealth() > 0)
 				{
 					t->takeDamage(CLEAN_DAMAGE);
+					// only report clean when the tile is fully clean
+					if (t->getCurrentHealth() <= 0)
+					{
+						map->addCleanDamage(t->getMaxHealth());
+					}
 				}
 			}
 		}

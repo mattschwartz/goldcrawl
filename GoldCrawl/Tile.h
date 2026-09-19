@@ -49,7 +49,8 @@ public:
 
 	float getCurrentHealth() const { return currentHealth; }
 	float getMaxHealth() const { return maxHealth; }
-	void takeDamage(float cleanDamage);
+	// returns how much damage was actually taken (factors in overkill)
+	float takeDamage(float cleanDamage);
 
 	const Sprite& getSprite() const;
 

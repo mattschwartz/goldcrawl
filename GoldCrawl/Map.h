@@ -19,6 +19,10 @@ public:
 	std::vector<std::shared_ptr<Tile>> getTilesAt(int x, int y) const;
 	Tilemap getTiles(TileLayer layer) const;
 
+	float getTotalDirtLevel() const { return totalDirtLevel; }
+	float getCleanDamage() const { return cleanLevel; }
+	void addCleanDamage(float amt) { cleanLevel += amt; }
+
 	void setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile);
 	bool hasCollision(int x, int y) const;
 	std::shared_ptr<Tile> getInteractable(int x, int y) const;
@@ -26,6 +30,12 @@ public:
 	void update(Uint64 deltaMillis);
 
 private:
+	// how clean the dungeon is
+	// cleanLevel / totalDirtLevel = cleanliness %
+	float cleanLevel;
+	// just how dirty this map really is
+	// sum of all dirty tiles
+	float totalDirtLevel;
 	// tiles
 	std::unordered_map<TileLayer, Tilemap> tilesByLayer;
 	Tilemap collisionTiles;

@@ -1,6 +1,6 @@
 #include "Map.h"
 
-Map::Map()
+Map::Map() : totalDirtLevel(0)
 {
 	for (auto& layer : SortedTileLayers)
 	{
@@ -45,6 +45,7 @@ void Map::setTile(TileLayer layer, int x, int y, std::shared_ptr<Tile> tile)
 	{
 		interactableTiles.emplace(Point{ x,y }, tile);
 	}
+	totalDirtLevel += tile->maxHealth;
 	tilesByLayer[layer].emplace(Point{ x,y }, std::move(tile));
 }
 
