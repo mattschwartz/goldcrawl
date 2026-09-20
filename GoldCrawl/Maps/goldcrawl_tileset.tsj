@@ -3,7 +3,7 @@
  "name":"goldcrawl_tileset",
  "objectalignment":"topleft",
  "spacing":0,
- "tilecount":64,
+ "tilecount":67,
  "tiledversion":"1.12.1",
  "tileheight":16,
  "tiles":[
@@ -739,6 +739,24 @@
                  "type":"string",
                  "value":"DoubleMoveSpeed"
                 }]
+        }, 
+        {
+         "id":68,
+         "image":"..\/Sprites\/temple_bottom_door.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":69,
+         "image":"..\/Sprites\/wooden_interior_left_door.png",
+         "imageheight":16,
+         "imagewidth":16
+        }, 
+        {
+         "id":70,
+         "image":"..\/Sprites\/temple_left_door.png",
+         "imageheight":16,
+         "imagewidth":16
         }],
  "tilewidth":16,
  "type":"tileset",
