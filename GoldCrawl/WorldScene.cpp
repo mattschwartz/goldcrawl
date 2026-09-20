@@ -2,8 +2,11 @@
 #include "AnimationManager.h"
 #include <format>
 #include "Color.h"
+#include "GameManager.h"
 
-WorldScene::WorldScene(std::shared_ptr<Map> currentMap) : isFadingOutScene(false), isFadingInScene(false)
+WorldScene::WorldScene(std::shared_ptr<Map> currentMap) :
+	isFadingOutScene(false),
+	isFadingInScene(false)
 {
 	controller = std::make_unique<WorldPlayerController>(
 		std::make_unique<Player>(),
@@ -13,11 +16,26 @@ WorldScene::WorldScene(std::shared_ptr<Map> currentMap) : isFadingOutScene(false
 
 void WorldScene::handleInput(const Input& input)
 {
-	controller->handleInput(input);
+	auto& gm = GameManager::only();
+	if (gm.isInDialog())
+	{
+		gm.getDialogController().handleInput(input);
+	}
+	else
+	{
+		controller->handleInput(input);
+	}
 }
 
 void WorldScene::update(Uint64 delta)
 {
+	auto& gm = GameManager::only();
+	if (gm.isInDialog())
+	{
+		gm.getDialogController().update(delta);
+		return;
+	}
+
 	if (isFadingOutScene)
 	{
 		transitionScene->update(delta);
@@ -61,6 +79,12 @@ void WorldScene::render(const Renderer& renderer) const
 	if (isFadingOutScene || isFadingInScene)
 	{
 		transitionScene->render(renderer);
+	}
+
+	auto& gm = GameManager::only();
+	if (gm.isInDialog())
+	{
+		gm.getDialogController().render(renderer);
 	}
 }
 

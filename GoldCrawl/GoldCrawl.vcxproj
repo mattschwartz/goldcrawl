@@ -163,7 +163,10 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
   <ItemGroup>
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="Broom.cpp" />
+    <ClCompile Include="DialogController.cpp" />
+    <ClCompile Include="DialogTile.cpp" />
     <ClCompile Include="Director.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GoldCrawl.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LootTile.cpp" />
@@ -199,8 +202,11 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="Broom.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="DialogController.h" />
+    <ClInclude Include="DialogTile.h" />
     <ClInclude Include="Director.h" />
     <ClInclude Include="FileSystem.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LootTile.h" />
     <ClInclude Include="Map.h" />

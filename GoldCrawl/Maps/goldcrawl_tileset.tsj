@@ -3,7 +3,7 @@
  "name":"goldcrawl_tileset",
  "objectalignment":"topleft",
  "spacing":0,
- "tilecount":60,
+ "tilecount":61,
  "tiledversion":"1.12.1",
  "tileheight":16,
  "tiles":[
@@ -633,6 +633,33 @@
                  "name":"hasCollision",
                  "type":"bool",
                  "value":true
+                }]
+        }, 
+        {
+         "id":64,
+         "image":"..\/Sprites\/old_dungeoneer_static.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"animation",
+                 "type":"string",
+                 "value":"old_dungeoneer.json"
+                }, 
+                {
+                 "name":"dialog_text",
+                 "type":"string",
+                 "value":"Hi there, young adventurer! Why don't you go clean some dungeons for me?"
+                }, 
+                {
+                 "name":"hasCollision",
+                 "type":"bool",
+                 "value":true
+                }, 
+                {
+                 "name":"interaction",
+                 "type":"string",
+                 "value":"dialog"
                 }]
         }],
  "tilewidth":16,

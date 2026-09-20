@@ -5,6 +5,7 @@
 #include "TrapTile.h"
 #include "LootTile.h"
 #include "Portal.h"
+#include "DialogTile.h"
 #include "POI.h"
 
 using namespace nlohmann;
@@ -94,6 +95,11 @@ void TiledImporter::parseTileLayer(const nlohmann::json& jLayer, Map& map, tiled
 				{
 					tile = std::make_shared<Tile>();
 					tile->cleanable = true;
+				}
+				else if (interaction == "dialog")
+				{
+					std::string dialogText = tt->getStringProp("dialog_text").value_or("Hey there!");
+					tile = std::make_shared<DialogTile>(dialogText);
 				}
 				else // default tile
 				{

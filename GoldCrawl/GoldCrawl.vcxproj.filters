@@ -90,6 +90,15 @@
     <ClCompile Include="MapTransitionScene.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogTile.cpp">
+      <Filter>Source Files\map</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="dependencies\SDL2.dll">
@@ -183,6 +192,15 @@
     </ClInclude>
     <ClInclude Include="MapTransitionScene.h">
       <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogTile.h">
+      <Filter>Header Files\map</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogController.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
