@@ -10,7 +10,7 @@
 class Player
 {
 public:
-	Player();
+	Player(Vector position);
 
 	const Sprite& getSprite() const;
 	Broom* getBroom() const { return broom.get(); }

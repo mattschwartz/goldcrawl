@@ -90,7 +90,8 @@ void TiledImporter::parseTileLayer(const nlohmann::json& jLayer, Map& map, tiled
 				}
 				else if (interaction == "loot_tile")
 				{
-					tile = std::make_shared<LootTile>();
+					auto goldAmount = tt->getIntProp("gold");
+					tile = std::make_shared<LootTile>(goldAmount.value_or(0));
 				}
 				else if (interaction == "clean")
 				{

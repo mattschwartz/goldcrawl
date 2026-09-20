@@ -6,7 +6,6 @@
 #include "Input.h"
 #include "WorldScene.h"
 #include "Map.h"
-#include "TiledImporter.h"
 
 #define TITLE "Clean, Crawl & Carry On"
 #define SCALE 4
@@ -31,16 +30,13 @@ static bool tick(Director& director, Input& input, Renderer& renderer)
 // fun fact: SDL requires this exact header
 int main(int argc, char* args[])
 {
-	auto& imp = TiledImporter::only();
-	auto starterMap = imp.parseTiledMap("Maps/intro_dungeon.tmj");
-
 	try
 	{
 		// init SDL
 		// its destructor forces cleanup automatically when it falls
 		// out of scope
 		bacon::SDLContext ctx;
-		Director director(std::make_unique<WorldScene>(std::move(starterMap))); // WorldScene starting scene
+		Director director(std::make_unique<WorldScene>()); // WorldScene starting scene
 		Input input;
 		Renderer renderer(TITLE, SCREEN_WIDTH, SCREEN_HEIGHT, SCALE);
 

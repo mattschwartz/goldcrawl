@@ -3,14 +3,28 @@
 #include <format>
 #include "Color.h"
 #include "GameManager.h"
+#include "TiledImporter.h"
 
-WorldScene::WorldScene(std::shared_ptr<Map> currentMap) :
+WorldScene::WorldScene() :
 	isFadingOutScene(false),
 	isFadingInScene(false)
 {
+	//std::string startingMap = "Maps/intro_dungeon.tmj";
+
+	//dbg
+	std::string startingMap = "Maps/dirty_dungeon_2.tmj";
+
+	auto& imp = TiledImporter::only();
+	auto starterMap = imp.parseTiledMap(startingMap);
+
+	//Point startingPosition = starterMap->getPointOfInterest("player_spawn")->position;
+	Point startingPosition = starterMap->getPointOfInterest("entrance")->position;
+	startingPosition.x -= 8;
+	startingPosition.y -= 8;
+
 	controller = std::make_unique<WorldPlayerController>(
-		std::make_unique<Player>(),
-		std::move(currentMap));
+		std::make_unique<Player>(Vector{ (float)startingPosition.x, (float)startingPosition.y }),
+		std::move(starterMap));
 	transitionScene = std::make_unique<MapTransitionScene>();
 }
 

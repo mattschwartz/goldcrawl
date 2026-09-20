@@ -1,7 +1,7 @@
 #include "Player.h"
 
-Player::Player() :
-	position({ 32, 32 }),
+Player::Player(Vector position) :
+	position(position),
 	facing(),
 	direction(),
 	sprite(Sprite{ "Sprites/charlie.png" }),
