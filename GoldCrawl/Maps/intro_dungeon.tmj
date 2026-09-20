@@ -88,8 +88,8 @@
                     0, 21, 21, 0, 24, 0, 21, 0, 21, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 21, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 21, 0, 0, 0, 0, 0,
-                    0, 21, 21, 0, 21, 21, 0, 0, 0, 0,
+                    0, 0, 0, 0, 21, 0, 21, 21, 21, 0,
+                    0, 21, 21, 0, 21, 21, 21, 21, 21, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                  "height":8,
                  "width":10,
@@ -99,6 +99,34 @@
          "height":16,
          "id":2,
          "name":"cleanable",
+         "opacity":1,
+         "startx":0,
+         "starty":0,
+         "type":"tilelayer",
+         "visible":true,
+         "width":32,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "chunks":[
+                {
+                 "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 65, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                 "height":8,
+                 "width":10,
+                 "x":10,
+                 "y":0
+                }],
+         "height":16,
+         "id":4,
+         "name":"entities",
          "opacity":1,
          "startx":0,
          "starty":0,
@@ -140,6 +168,30 @@
                  "width":16,
                  "x":271.875,
                  "y":-1.875
+                }, 
+                {
+                 "height":0,
+                 "id":2,
+                 "name":"dialog partner",
+                 "opacity":1,
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog_text",
+                         "type":"string",
+                         "value":"This place sure is filthy! Are you here to clean up?;Well, if you want to earn your keep, press 'B' to sweep up this grime!;We adventurers sure would appreciate it!"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"dialog"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":295.125,
+                 "y":74.2159090909091
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -147,8 +199,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":3,
+ "nextlayerid":5,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.12.1",
