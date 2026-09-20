@@ -3,7 +3,7 @@
  "name":"goldcrawl_tileset",
  "objectalignment":"topleft",
  "spacing":0,
- "tilecount":63,
+ "tilecount":64,
  "tiledversion":"1.12.1",
  "tileheight":16,
  "tiles":[
@@ -716,6 +716,28 @@
                  "name":"hasCollision",
                  "type":"bool",
                  "value":true
+                }]
+        }, 
+        {
+         "id":67,
+         "image":"..\/Sprites\/speed_upgrade.png",
+         "imageheight":16,
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"interaction",
+                 "type":"string",
+                 "value":"upgrade"
+                }, 
+                {
+                 "name":"upgrade_cost",
+                 "type":"float",
+                 "value":1500
+                }, 
+                {
+                 "name":"upgrade_name",
+                 "type":"string",
+                 "value":"DoubleMoveSpeed"
                 }]
         }],
  "tilewidth":16,

@@ -7,11 +7,13 @@ enum class PlayerUpgrade
 {
 	DoubleRadius,
 	DoubleCleanliness,
-	DoubleSpeed
+	DoubleCleanSpeed,
+	DoubleMoveSpeed
 };
 
 static std::unordered_map<std::string, PlayerUpgrade> PlayerUpgradesByName = {
 	{"DoubleRadius", PlayerUpgrade::DoubleRadius},
 	{"DoubleCleanliness", PlayerUpgrade::DoubleCleanliness},
-	{"DoubleSpeed", PlayerUpgrade::DoubleSpeed},
+	{"DoubleCleanSpeed", PlayerUpgrade::DoubleCleanSpeed},
+	{"DoubleMoveSpeed", PlayerUpgrade::DoubleMoveSpeed},
 };

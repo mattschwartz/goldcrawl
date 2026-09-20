@@ -2,6 +2,7 @@
 #include "Broom.h"
 #include "TiledImporter.h"
 #include "AnimationManager.h"
+#include "GameManager.h"
 
 // pixels per second
 constexpr auto SPEED = 64;
@@ -177,6 +178,11 @@ void WorldPlayerController::update(Uint64 deltaMillis)
 
 	double sec = deltaMillis / 1000.0 + 0.00001;
 	double speed = (direction.x != 0 && direction.y != 0) ? DIAGONAL_SPEED : SPEED;
+
+	if (GameManager::only().isUpgradeUnlocked(PlayerUpgrade::DoubleMoveSpeed))
+	{
+		speed *= 1.33;
+	}
 
 	Vector newPosition{ 0,0 };
 	newPosition.x = position.x + direction.x * sec * speed;

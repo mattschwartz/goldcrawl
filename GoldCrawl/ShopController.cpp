@@ -81,8 +81,11 @@ void ShopController::render(const Renderer& renderer) const
 	case PlayerUpgrade::DoubleCleanliness:
 		renderer.drawText("[Double clean damage]", 5, 61, colors::base);
 		break;
-	case PlayerUpgrade::DoubleSpeed:
-		renderer.drawText("[Double clean speed]", 5, 61, colors::base);
+	case PlayerUpgrade::DoubleCleanSpeed:
+		renderer.drawText("[Faster clean speed]", 5, 61, colors::base);
+		break;
+	case PlayerUpgrade::DoubleMoveSpeed:
+		renderer.drawText("[Faster move speed]", 5, 61, colors::base);
 		break;
 	}
 }
