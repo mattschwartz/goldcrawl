@@ -85,12 +85,13 @@ void DialogController::update(Uint64 delta)
 
 void DialogController::render(const Renderer& renderer) const
 {
-	renderer.drawBox({ 0, 0, SCREEN_WIDTH, 60 }, colors::darkest, true);
+	renderer.drawBox({ 0, 0, SCREEN_WIDTH, 66 }, colors::highlight, false);
+	renderer.drawBox({ 1, 1, SCREEN_WIDTH - 2, 64 }, colors::darkest, true);
 
-	int y = 0;
+	int y = 2;
 	for (auto& str : renderDialogLines)
 	{
-		renderer.drawText(str, 0, y, colors::highlight);
+		renderer.drawText(str, 2, y, colors::highlight);
 		y += 16; // line height;
 	}
 }
@@ -99,12 +100,12 @@ void DialogController::updateRevealedChars()
 {
 	int line = 0;
 	renderDialogLines.clear();
-	for (int i = 0; i <= numCharsRevealed / 23; ++i)
+	for (int i = 0; i <= numCharsRevealed / 22; ++i)
 	{
 		renderDialogLines.push_back("");
 	}
 	for (int i = 0; i <= numCharsRevealed; ++i)
 	{
-		renderDialogLines[i / 23] += pages[pageNumber][i];
+		renderDialogLines[i / 22] += pages[pageNumber][i];
 	}
 }
