@@ -97,7 +97,7 @@
       <Filter>Source Files\map</Filter>
     </ClCompile>
     <ClCompile Include="DialogController.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
