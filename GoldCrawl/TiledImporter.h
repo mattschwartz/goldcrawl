@@ -38,6 +38,7 @@ namespace tiled
 		std::optional<std::string> getAnimation() const;
 		std::optional<std::string> getInteraction() const;
 		std::optional<std::string> getStringProp(const std::string& propName) const;
+		std::optional<int> getIntProp(const std::string& propName) const;
 	};
 
 	struct Tileset

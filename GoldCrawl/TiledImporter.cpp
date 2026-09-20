@@ -6,6 +6,7 @@
 #include "LootTile.h"
 #include "Portal.h"
 #include "DialogTile.h"
+#include "UpgradeTile.h"
 #include "POI.h"
 
 using namespace nlohmann;
@@ -95,6 +96,14 @@ void TiledImporter::parseTileLayer(const nlohmann::json& jLayer, Map& map, tiled
 				{
 					tile = std::make_shared<Tile>();
 					tile->cleanable = true;
+				}
+				else if (interaction == "upgrade")
+				{
+					auto upgradeName = tt->getStringProp("upgrade_name");
+					auto upgradeCost = tt->getIntProp("upgrade_cost");
+					if (!upgradeName.has_value() || !upgradeCost.has_value()) throw tiled::TiledError("missing upgrade name or cost");
+
+					tile = std::make_shared<UpgradeTile>(PlayerUpgradesByName[*upgradeName], *upgradeCost);
 				}
 				else // default tile
 				{
@@ -282,6 +291,18 @@ std::optional<std::string> tiled::Tile::getStringProp(const std::string& propNam
 		if (prop->name == propName)
 		{
 			return std::get<std::string>(prop->value);
+		}
+	}
+	return std::nullopt;
+}
+
+std::optional<int> tiled::Tile::getIntProp(const std::string& propName) const
+{
+	for (auto& prop : properties)
+	{
+		if (prop->name == propName)
+		{
+			return (int)std::get<float>(prop->value);
 		}
 	}
 	return std::nullopt;

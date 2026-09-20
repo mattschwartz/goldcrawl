@@ -113,7 +113,23 @@
          "id":11,
          "image":"..\/Sprites\/broom.png",
          "imageheight":16,
-         "imagewidth":16
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"interaction",
+                 "type":"string",
+                 "value":"upgrade"
+                }, 
+                {
+                 "name":"upgrade_cost",
+                 "type":"float",
+                 "value":250
+                }, 
+                {
+                 "name":"upgrade_name",
+                 "type":"string",
+                 "value":"double_radius"
+                }]
         }, 
         {
          "id":12,
@@ -309,7 +325,23 @@
          "id":31,
          "image":"..\/Sprites\/squirt_bottle.png",
          "imageheight":16,
-         "imagewidth":16
+         "imagewidth":16,
+         "properties":[
+                {
+                 "name":"interaction",
+                 "type":"string",
+                 "value":"upgrade"
+                }, 
+                {
+                 "name":"upgrade_cost",
+                 "type":"float",
+                 "value":500
+                }, 
+                {
+                 "name":"upgrade_name",
+                 "type":"string",
+                 "value":"DoubleCleanliness"
+                }]
         }, 
         {
          "id":32,
