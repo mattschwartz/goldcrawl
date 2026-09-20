@@ -17,6 +17,20 @@ DialogController& GameManager::getDialogController() const
 	return *dialogController;
 }
 
+bool GameManager::isUpgradeUnlocked(PlayerUpgrade upgrade) const
+{
+	if (auto it = playerUpgrades.find(upgrade); it != playerUpgrades.end())
+	{
+		return it->second;
+	}
+	return false;
+}
+
+void GameManager::unlockUpgrade(PlayerUpgrade upgrade)
+{
+	playerUpgrades.emplace(upgrade, true);
+}
+
 bool GameManager::isInDialog() const
 {
 	return inDialog;

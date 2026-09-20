@@ -202,5 +202,8 @@
     <ClInclude Include="GameManager.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerUpgrades.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
