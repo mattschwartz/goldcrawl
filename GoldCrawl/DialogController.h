@@ -13,9 +13,12 @@ public:
 	void render(const Renderer& renderer) const;
 
 private:
-	bool dialogFinished;
+	bool dialogPageFinished;
+	int pageNumber;
+	int totalNumPages;
+	std::vector<std::string> pages;
 	std::string dialogText;
-	std::vector<std::string> dialogLines;
+	std::vector<std::string> renderDialogLines;
 	int numCharsRevealed;
 	Uint64 nextCharRevealTimer;
 

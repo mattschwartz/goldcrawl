@@ -8,27 +8,55 @@ constexpr auto CHAR_REVEAL_DELAY_MILLIS = 33;
 void DialogController::startDialog(const std::string& dialogText)
 {
 	this->dialogText = dialogText;
-	dialogLines.clear();
+	pages.clear();
+	renderDialogLines.clear();
 	numCharsRevealed = 0;
 	nextCharRevealTimer = SDL_GetTicks64() + CHAR_REVEAL_DELAY_MILLIS; // reveal in now + X ms
-	dialogFinished = false;
+	dialogPageFinished = false;
+
+	pageNumber = 0;
+	int i = 0;
+	pages.push_back("");
+	// split ';' into different pages of dialog
+	// for being hacky
+	for (auto c : dialogText)
+	{
+		if (c == ';')
+		{
+			++i;
+			pages.push_back("");
+			continue;
+		}
+		pages[i] += c;
+	}
 }
 
 void DialogController::handleInput(const Input& input)
 {
 	if (input.isBindingPressed(KeyBinding::A) || input.isBindingPressed(KeyBinding::B))
 	{
-		if (dialogFinished)
+		if (dialogPageFinished)
 		{
-			GameManager::only().closeDialog();
+			++pageNumber;
+			if (pageNumber >= pages.size())
+			{
+				GameManager::only().closeDialog();
+			}
+			else
+			{
+				dialogPageFinished = false;
+				numCharsRevealed = 0;
+				nextCharRevealTimer = SDL_GetTicks64() + CHAR_REVEAL_DELAY_MILLIS;
+				updateRevealedChars();
+			}
 			return;
 		}
 
 		// not all the characters have been revealed yet,
 		// so reveal them all because the player is in a hurry
-		if (numCharsRevealed < this->dialogText.size())
+		if (numCharsRevealed < pages[pageNumber].size())
 		{
-			numCharsRevealed = this->dialogText.size() - 1;
+			numCharsRevealed = pages[pageNumber].size() - 1;
 			updateRevealedChars();
 		}
 	}
@@ -36,22 +64,22 @@ void DialogController::handleInput(const Input& input)
 
 void DialogController::update(Uint64 delta)
 {
-	if (dialogFinished) return;
+	if (dialogPageFinished) return;
 
 	if (nextCharRevealTimer <= SDL_GetTicks64())
 	{
 		++numCharsRevealed;
-		if (numCharsRevealed >= dialogText.size())
+		if (numCharsRevealed >= pages[pageNumber].size())
 		{
-			numCharsRevealed = dialogText.size() - 1;
+			numCharsRevealed = pages[pageNumber].size() - 1;
 		}
 		nextCharRevealTimer = SDL_GetTicks64() + CHAR_REVEAL_DELAY_MILLIS;
 		updateRevealedChars();
 	}
 
-	if (numCharsRevealed >= dialogText.size() - 1)
+	if (numCharsRevealed >= pages[pageNumber].size() - 1)
 	{
-		dialogFinished = true;
+		dialogPageFinished = true;
 	}
 }
 
@@ -60,7 +88,7 @@ void DialogController::render(const Renderer& renderer) const
 	renderer.drawBox({ 0, 0, SCREEN_WIDTH, 60 }, colors::darkest, true);
 
 	int y = 0;
-	for (auto& str : dialogLines)
+	for (auto& str : renderDialogLines)
 	{
 		renderer.drawText(str, 0, y, colors::highlight);
 		y += 16; // line height;
@@ -70,13 +98,13 @@ void DialogController::render(const Renderer& renderer) const
 void DialogController::updateRevealedChars()
 {
 	int line = 0;
-	dialogLines.clear();
+	renderDialogLines.clear();
 	for (int i = 0; i <= numCharsRevealed / 23; ++i)
 	{
-		dialogLines.push_back("");
+		renderDialogLines.push_back("");
 	}
 	for (int i = 0; i <= numCharsRevealed; ++i)
 	{
-		dialogLines[i / 23] += dialogText[i];
+		renderDialogLines[i / 23] += pages[pageNumber][i];
 	}
 }

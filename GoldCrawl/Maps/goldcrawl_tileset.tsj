@@ -649,7 +649,7 @@
                 {
                  "name":"dialog_text",
                  "type":"string",
-                 "value":"Hi there, young adventurer! Why don't you go clean some dungeons for me?"
+                 "value":"Hi there, young adventurer! Why don't you go clean some dungeons for me?;You can press 'B' to sweep up the grime!;Thanks!"
                 }, 
                 {
                  "name":"hasCollision",
