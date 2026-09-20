@@ -3,6 +3,7 @@
 #include "PlayerController.h"
 #include "Vector.h"
 #include "Map.h"
+#include "AnimationManager.h"
 
 constexpr auto TRANSITION_DURATION = 1000;
 
@@ -34,6 +35,9 @@ private:
 
 	Vector newPlayerPosition;
 	std::shared_ptr<Map> loadingMap;
+
+	bool playedWinAnimation;
+	std::weak_ptr<Animation> winAnimation;
 
 	bool canMove(Vector& newPosition) const;
 	bool enterPortal();

@@ -6,11 +6,12 @@ AnimationManager& AnimationManager::only()
     return instance;
 }
 
-void AnimationManager::addOneShot(const std::string& filepath, SDL_Rect bounds)
+std::shared_ptr<Animation> AnimationManager::addOneShot(const std::string& filepath, SDL_Rect bounds)
 {
     auto spriteAnimation = std::make_shared<SpriteAnimation>(filepath, "", false);
     auto animation = std::make_shared<Animation>(spriteAnimation, bounds);
     animations.push_back(animation);
+    return animation;
 }
 
 void AnimationManager::update(Uint64 delta)

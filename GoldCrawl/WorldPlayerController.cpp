@@ -1,6 +1,7 @@
 #include "WorldPlayerController.h"
 #include "Broom.h"
 #include "TiledImporter.h"
+#include "AnimationManager.h"
 
 // pixels per second
 constexpr auto SPEED = 64;
@@ -9,6 +10,7 @@ constexpr auto DIAGONAL_SPEED = 64 * 0.75;
 
 WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std::shared_ptr<Map> currentMap) :
 	PlayerController(std::move(player)),
+	playedWinAnimation(false),
 	isLoadingNewMap(false),
 	showDirtMarkers(false),
 	newPlayerPosition(),
@@ -42,6 +44,11 @@ Tile* WorldPlayerController::getTargetedTile() const
 
 void WorldPlayerController::handleInput(const Input& input)
 {
+	if (auto lock = winAnimation.lock())
+	{
+		// win animation in progress
+		return;
+	}
 	if (sceneTransitioning || isLoadingNewMap) return;
 
 	Vector playerDirection{ 0,0 };
@@ -65,6 +72,12 @@ void WorldPlayerController::handleInput(const Input& input)
 	if (input.isBindingPressed(KeyBinding::B))
 	{
 		getPlayer()->getBroom()->sweepBroom(getPlayer()->getPosition(), getMap());
+		if (!playedWinAnimation && getMap()->getCleanDamage() >= getMap()->getTotalDirtLevel())
+		{
+			playedWinAnimation = true;
+			winAnimation = AnimationManager::only().addOneShot("Sprites/clean_animation.json",
+				SDL_Rect{ (int)mapOffset.x, (int)mapOffset.y, SCREEN_WIDTH, SCREEN_HEIGHT });
+		}
 	}
 	if (input.isBindingPressed(KeyBinding::A))
 	{
@@ -75,6 +88,12 @@ void WorldPlayerController::handleInput(const Input& input)
 			if (lock->getMaxHealth())
 			{
 				getMap()->addCleanDamage(lock->getMaxHealth());
+				if (!playedWinAnimation && getMap()->getCleanDamage() >= getMap()->getTotalDirtLevel())
+				{
+					playedWinAnimation = true;
+					winAnimation = AnimationManager::only().addOneShot("Sprites/clean_animation.json", 
+						SDL_Rect{ (int)mapOffset.x, (int)mapOffset.y, SCREEN_WIDTH, SCREEN_HEIGHT });
+				}
 			}
 		}
 	}
@@ -92,6 +111,11 @@ void WorldPlayerController::handleInput(const Input& input)
 
 void WorldPlayerController::update(Uint64 deltaMillis)
 {
+	if (auto lock = winAnimation.lock())
+	{
+		// win animation in progress
+		return;
+	}
 	if (isLoadingNewMap) return;
 
 	if (sceneTransitioning)

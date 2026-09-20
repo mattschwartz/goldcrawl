@@ -16,7 +16,7 @@ class AnimationManager
 public:
 	static AnimationManager& only();
 
-	void addOneShot(const std::string& filepath, SDL_Rect bounds);
+	std::shared_ptr<Animation> addOneShot(const std::string& filepath, SDL_Rect bounds);
 
 	void update(Uint64 delta);
 	void render(const Renderer& renderer, Vector mapOffset) const;
