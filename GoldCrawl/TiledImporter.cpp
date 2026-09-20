@@ -96,11 +96,6 @@ void TiledImporter::parseTileLayer(const nlohmann::json& jLayer, Map& map, tiled
 					tile = std::make_shared<Tile>();
 					tile->cleanable = true;
 				}
-				else if (interaction == "dialog")
-				{
-					std::string dialogText = tt->getStringProp("dialog_text").value_or("Hey there!");
-					tile = std::make_shared<DialogTile>(dialogText);
-				}
 				else // default tile
 				{
 					tile = std::make_shared<Tile>();
@@ -170,6 +165,14 @@ void TiledImporter::parseObjectLayer(const nlohmann::json& j, Map& map)
 				portal->bounds = { x, y, w, h };
 				map.addPortal(portal);
 			}
+		}
+		else if (type == "dialog")
+		{
+			int x = (jObject["x"].get<float>() / TILE_SIZE);
+			int y = (jObject["y"].get<float>() / TILE_SIZE);
+			auto dialogText = getProp(jObject, "dialog_text");
+			auto tile = std::make_shared<DialogTile>(dialogText.value());
+			map.setTile(TileLayer::Sky, x, y, tile);
 		}
 		else
 		{

@@ -108,6 +108,13 @@ void WorldScene::renderMap(const Renderer& renderer) const
 				continue;
 			}
 
+			if (controller->getTargetedTile() && controller->getTargetedTile() == tile.get())
+			{
+				renderPrompt = true;
+				promptX = x;
+				promptY = y;
+			}
+
 			if (!tile->hasSprite()) continue;
 
 			renderer.drawSprite(tile->getSprite(), {
@@ -127,13 +134,6 @@ void WorldScene::renderMap(const Renderer& renderer) const
 			{
 				renderer.drawBox({ x, y + TILE_SIZE - 2, TILE_SIZE, 2 }, colors::darkest, true);
 				renderer.drawBox({ x, y + TILE_SIZE - 2, (int)(TILE_SIZE * tile->getCurrentHealth() / tile->getMaxHealth()), 2 }, colors::base, true);
-			}
-
-			if (controller->getTargetedTile() && controller->getTargetedTile() == tile.get())
-			{
-				renderPrompt = true;
-				promptX = x;
-				promptY = y;
 			}
 		}
 	}
