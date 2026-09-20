@@ -1,6 +1,9 @@
 #include "Map.h"
 
-Map::Map() : cleanLevel(0), totalDirtLevel(0)
+Map::Map() : 
+	finishedCleaning(false),
+	cleanLevel(0), 
+	totalDirtLevel(0)
 {
 	for (auto& layer : SortedTileLayers)
 	{

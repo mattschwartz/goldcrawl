@@ -39,6 +39,7 @@ void ShopController::handleInput(const Input& input)
 				return;
 			}
 			// unlock upgrade
+			gm.addGold(-cost);
 			gm.unlockUpgrade(upgrade);
 		}
 		gm.closeShop();

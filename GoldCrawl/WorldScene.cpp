@@ -12,7 +12,7 @@ WorldScene::WorldScene() :
 	//std::string startingMap = "Maps/intro_dungeon.tmj";
 
 	//dbg
-	std::string startingMap = "Maps/dirty_dungeon_4.tmj";
+	std::string startingMap = "Maps/dirty_dungeon_5.tmj";
 
 	auto& imp = TiledImporter::only();
 	auto starterMap = imp.parseTiledMap(startingMap);

@@ -36,7 +36,6 @@ private:
 	Vector newPlayerPosition;
 	std::shared_ptr<Map> loadingMap;
 
-	bool playedWinAnimation;
 	std::weak_ptr<Animation> winAnimation;
 
 	bool canMove(Vector& newPosition) const;

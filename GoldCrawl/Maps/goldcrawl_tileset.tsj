@@ -134,7 +134,7 @@
                 {
                  "name":"upgrade_cost",
                  "type":"float",
-                 "value":250
+                 "value":550
                 }, 
                 {
                  "name":"upgrade_name",
@@ -356,7 +356,7 @@
                 {
                  "name":"upgrade_cost",
                  "type":"float",
-                 "value":500
+                 "value":750
                 }, 
                 {
                  "name":"upgrade_name",

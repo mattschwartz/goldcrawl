@@ -11,7 +11,6 @@ constexpr auto DIAGONAL_SPEED = 64 * 0.75;
 
 WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std::shared_ptr<Map> currentMap) :
 	PlayerController(std::move(player)),
-	playedWinAnimation(false),
 	isLoadingNewMap(false),
 	showDirtMarkers(false),
 	newPlayerPosition(),
@@ -73,11 +72,12 @@ void WorldPlayerController::handleInput(const Input& input)
 	if (input.isBindingPressed(KeyBinding::B))
 	{
 		getPlayer()->getBroom()->sweepBroom(getPlayer()->getPosition(), getMap());
-		if (!playedWinAnimation && getMap()->getCleanDamage() >= getMap()->getTotalDirtLevel())
+		if (!getMap()->didFinishCleaning() && getMap()->getCleanDamage() >= getMap()->getTotalDirtLevel())
 		{
-			playedWinAnimation = true;
+			getMap()->setFinishedCleaning(true);
 			winAnimation = AnimationManager::only().addOneShot("Sprites/clean_animation.json",
 				SDL_Rect{ (int)mapOffset.x, (int)mapOffset.y, SCREEN_WIDTH, SCREEN_HEIGHT });
+			GameManager::only().addGold((int)(getMap()->getTotalDirtLevel() / 200.f));
 		}
 	}
 	if (input.isBindingPressed(KeyBinding::A))
@@ -89,11 +89,12 @@ void WorldPlayerController::handleInput(const Input& input)
 			if (lock->getMaxHealth())
 			{
 				getMap()->addCleanDamage(lock->getMaxHealth());
-				if (!playedWinAnimation && getMap()->getCleanDamage() >= getMap()->getTotalDirtLevel())
+				if (!getMap()->didFinishCleaning() && getMap()->getCleanDamage() >= getMap()->getTotalDirtLevel())
 				{
-					playedWinAnimation = true;
-					winAnimation = AnimationManager::only().addOneShot("Sprites/clean_animation.json", 
+					getMap()->setFinishedCleaning(true);
+					winAnimation = AnimationManager::only().addOneShot("Sprites/clean_animation.json",
 						SDL_Rect{ (int)mapOffset.x, (int)mapOffset.y, SCREEN_WIDTH, SCREEN_HEIGHT });
+					GameManager::only().addGold((int)(getMap()->getTotalDirtLevel() / 200.f));
 				}
 			}
 		}

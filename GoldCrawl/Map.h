@@ -14,6 +14,9 @@ public:
 
 	Map();
 
+	bool didFinishCleaning() const { return totalDirtLevel == 0 || finishedCleaning; }
+	void setFinishedCleaning(bool finishedCleaning) { this->finishedCleaning = finishedCleaning; }
+
 	/// <summary>
 	/// returns all the tiles at the specified position, with topmost tile first,
 	/// depending on sortedTileLayer
@@ -38,6 +41,7 @@ public:
 	void update(Uint64 deltaMillis);
 
 private:
+	bool finishedCleaning;
 	// how clean the dungeon is
 	// cleanLevel / totalDirtLevel = cleanliness %
 	float cleanLevel;
