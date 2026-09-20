@@ -1,10 +1,11 @@
 #include "LootTile.h"
 #include "AnimationManager.h"
 #include "Player.h"
+#include "GameManager.h"
 
 void LootTile::interact(Player& player)
 {
-	player.addGold(123);
+	GameManager::only().addGold(123);
 
 	// play "set trap" sound effect
 	// play "set trap" animation effect

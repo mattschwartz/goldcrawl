@@ -21,6 +21,10 @@ void WorldScene::handleInput(const Input& input)
 	{
 		gm.getDialogController().handleInput(input);
 	}
+	else if (gm.isInShop())
+	{
+		gm.getShopController().handleInput(input);
+	}
 	else
 	{
 		controller->handleInput(input);
@@ -33,6 +37,11 @@ void WorldScene::update(Uint64 delta)
 	if (gm.isInDialog())
 	{
 		gm.getDialogController().update(delta);
+		return;
+	}
+	if (gm.isInShop())
+	{
+		gm.getShopController().update(delta);
 		return;
 	}
 
@@ -85,6 +94,10 @@ void WorldScene::render(const Renderer& renderer) const
 	if (gm.isInDialog())
 	{
 		gm.getDialogController().render(renderer);
+	}
+	else if (gm.isInShop())
+	{
+		gm.getShopController().render(renderer);
 	}
 }
 
@@ -187,7 +200,7 @@ void WorldScene::renderToolbar(const Renderer& renderer) const
 
 	renderer.drawSprite(toolbarSprite, { x, y, SCREEN_WIDTH, TILE_SIZE });
 	// https://stackoverflow.com/questions/530614/print-leading-zeros-with-c-output-operator
-	std::string coinText = std::format("{:05}", controller->getPlayer()->getGold());
+	std::string coinText = std::format("{:05}", GameManager::only().getGold());
 	renderer.drawText(coinText, x + 25, y + 1, colors::darkest);
 
 	int gemX = 100, gemY = y + 6;

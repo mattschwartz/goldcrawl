@@ -175,6 +175,7 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SDLContext.cpp" />
+    <ClCompile Include="ShopController.cpp" />
     <ClCompile Include="SpriteAnimation.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TiledImporter.cpp" />
@@ -222,6 +223,7 @@ xcopy "$(ProjectDir)Maps" "$(TargetDir)Maps" /E /I /Y</Command>
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SDLContext.h" />
+    <ClInclude Include="ShopController.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteAnimation.h" />
     <ClInclude Include="Tile.h" />

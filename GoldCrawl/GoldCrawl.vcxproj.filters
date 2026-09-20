@@ -102,6 +102,9 @@
     <ClCompile Include="UpgradeTile.cpp">
       <Filter>Source Files\map</Filter>
     </ClCompile>
+    <ClCompile Include="ShopController.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="dependencies\SDL2.dll">
@@ -210,6 +213,9 @@
     </ClInclude>
     <ClInclude Include="UpgradeTile.h">
       <Filter>Header Files\map</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopController.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

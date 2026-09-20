@@ -1,8 +1,10 @@
 #include "GameManager.h"
 
 GameManager::GameManager() :
+	inShop(false),
 	inDialog(false),
-	dialogController(std::make_unique<DialogController>())
+	dialogController(std::make_unique<DialogController>()),
+	shopController(std::make_unique<ShopController>())
 {
 }
 
@@ -17,6 +19,11 @@ DialogController& GameManager::getDialogController() const
 	return *dialogController;
 }
 
+ShopController& GameManager::getShopController() const
+{
+	return *shopController;
+}
+
 bool GameManager::isUpgradeUnlocked(PlayerUpgrade upgrade) const
 {
 	if (auto it = playerUpgrades.find(upgrade); it != playerUpgrades.end())
@@ -29,6 +36,22 @@ bool GameManager::isUpgradeUnlocked(PlayerUpgrade upgrade) const
 void GameManager::unlockUpgrade(PlayerUpgrade upgrade)
 {
 	playerUpgrades.emplace(upgrade, true);
+}
+
+bool GameManager::isInShop() const
+{
+	return inShop;
+}
+
+void GameManager::openShop(const std::string& prompt, PlayerUpgrade upgrade, int cost)
+{
+	inShop = true;
+	shopController->openShop(prompt, upgrade, cost);
+}
+
+void GameManager::closeShop()
+{
+	inShop = false;
 }
 
 bool GameManager::isInDialog() const

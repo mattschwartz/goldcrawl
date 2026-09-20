@@ -6,13 +6,12 @@
 class UpgradeTile : public Tile
 {
 public:
-	UpgradeTile(PlayerUpgrade upgrade, int upgradeCost) : consumed(false), upgrade(upgrade), upgradeCost(upgradeCost) {}
+	UpgradeTile(PlayerUpgrade upgrade, int upgradeCost) : upgrade(upgrade), upgradeCost(upgradeCost) {}
 
-	bool isInteractable() const { return !consumed; }
+	bool isInteractable() const { return true; }
 	void interact(class Player& player) override;
 
 private:
-	bool consumed;
 	PlayerUpgrade upgrade;
 	int upgradeCost;
 };

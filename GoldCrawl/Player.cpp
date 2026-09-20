@@ -1,7 +1,6 @@
 #include "Player.h"
 
 Player::Player() :
-	gold(0),
 	position({ 32, 32 }),
 	facing(),
 	direction(),
