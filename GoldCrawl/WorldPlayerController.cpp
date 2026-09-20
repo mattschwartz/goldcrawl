@@ -7,7 +7,7 @@ constexpr auto SPEED = 64;
 // slow down the diagonal movement
 constexpr auto DIAGONAL_SPEED = 64 * 0.75;
 
-WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap) :
+WorldPlayerController::WorldPlayerController(std::unique_ptr<Player> player, std::shared_ptr<Map> currentMap) :
 	PlayerController(std::move(player)),
 	isLoadingNewMap(false),
 	showDirtMarkers(false),
@@ -270,7 +270,7 @@ bool WorldPlayerController::enterPortal()
 {
 	if (auto portal = getMap()->getPortal(getPlayer()->getPosition()))
 	{
-		TiledImporter imp{};
+		auto& imp = TiledImporter::only();
 		auto newMap = imp.parseTiledMap(portal->destinationMap);
 		auto spawnPoi = newMap->getPointOfInterest(portal->destinationPoi);
 		Vector newPosition{

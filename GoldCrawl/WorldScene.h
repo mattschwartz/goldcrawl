@@ -9,7 +9,7 @@
 class WorldScene : public Scene
 {
 public:
-	WorldScene(std::unique_ptr<Map> currentMap);
+	WorldScene(std::shared_ptr<Map> currentMap);
 
 	void handleInput(const Input& input) override;
 	void update(Uint64 delta) override;

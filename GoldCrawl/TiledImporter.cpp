@@ -9,8 +9,19 @@
 
 using namespace nlohmann;
 
-std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
+TiledImporter& TiledImporter::only()
 {
+	static TiledImporter instance;
+	return instance;
+}
+
+std::shared_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
+{
+	if (auto it = mapCache.find(filepath); it != mapCache.end())
+	{
+		return it->second;
+	}
+
 	json j = json::parse(bacon::fs::readText(filepath).value_or(""));
 	if (!j.contains("tilesets") || !j["tilesets"].is_array()) throw tiled::TiledError("'tilesets' missing or not an array");
 	if (!j.contains("layers") || !j["layers"].is_array()) throw tiled::TiledError("'layers' missing or not an array");
@@ -21,7 +32,7 @@ std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
 	auto tileset = parseTileset("Maps/" + tilesetSrc); // todo - cheating with the "Maps/" part, but oh well, relative filepaths can wait
 	tileset->firstGid = j["tilesets"][0]["firstgid"];
 
-	auto map = std::make_unique<Map>();
+	auto map = std::make_shared<Map>();
 
 	for (auto& jLayer : j["layers"])
 	{
@@ -35,6 +46,7 @@ std::unique_ptr<Map> TiledImporter::parseTiledMap(const std::string& filepath)
 		}
 	}
 
+	mapCache.emplace(filepath, map);
 	return map;
 }
 

@@ -3,7 +3,7 @@
 #include <format>
 #include "Color.h"
 
-WorldScene::WorldScene(std::unique_ptr<Map> currentMap) : isFadingOutScene(false), isFadingInScene(false)
+WorldScene::WorldScene(std::shared_ptr<Map> currentMap) : isFadingOutScene(false), isFadingInScene(false)
 {
 	controller = std::make_unique<WorldPlayerController>(
 		std::make_unique<Player>(),

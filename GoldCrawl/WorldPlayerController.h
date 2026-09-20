@@ -11,7 +11,7 @@ class WorldPlayerController : public PlayerController
 public:
 	bool isLoadingNewMap;
 
-	WorldPlayerController(std::unique_ptr<Player> player, std::unique_ptr<Map> currentMap);
+	WorldPlayerController(std::unique_ptr<Player> player, std::shared_ptr<Map> currentMap);
 
 	bool shouldShowDirtMarkers() const { return showDirtMarkers; }
 	void switchToLoadingMap();
@@ -25,7 +25,7 @@ public:
 
 private:
 	std::weak_ptr<Tile> targetedTile;
-	std::unique_ptr<Map> currentMap;
+	std::shared_ptr<Map> currentMap;
 	Vector mapOffset;
 	Vector transitioningToMapOffset;
 	bool sceneTransitioning;
@@ -33,7 +33,7 @@ private:
 	bool showDirtMarkers;
 
 	Vector newPlayerPosition;
-	std::unique_ptr<Map> loadingMap;
+	std::shared_ptr<Map> loadingMap;
 
 	bool canMove(Vector& newPosition) const;
 	bool enterPortal();

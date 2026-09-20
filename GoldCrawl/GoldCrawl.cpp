@@ -31,8 +31,8 @@ static bool tick(Director& director, Input& input, Renderer& renderer)
 // fun fact: SDL requires this exact header
 int main(int argc, char* args[])
 {
-	TiledImporter imp{};
-	auto starterMap = imp.parseTiledMap("Maps/overworld.tmj");
+	auto& imp = TiledImporter::only();
+	auto starterMap = imp.parseTiledMap("Maps/intro_dungeon.tmj");
 
 	try
 	{
