@@ -90,7 +90,7 @@
          "starty":-16,
          "type":"tilelayer",
          "visible":true,
-         "width":48,
+         "width":32,
          "x":0,
          "y":0
         }, 
@@ -113,7 +113,7 @@
                         {
                          "name":"spawn_poi",
                          "type":"string",
-                         "value":"dungeon_1_exit"
+                         "value":"dungeon_3_exit"
                         }, 
                         {
                          "name":"type",
