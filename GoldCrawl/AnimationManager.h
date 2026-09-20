@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Vector.h"
 #include "Renderer.h"
 #include "SpriteAnimation.h"
 
@@ -18,7 +19,7 @@ public:
 	void addOneShot(const std::string& filepath, SDL_Rect bounds);
 
 	void update(Uint64 delta);
-	void render(const Renderer& renderer) const;
+	void render(const Renderer& renderer, Vector mapOffset) const;
 
 private:
 	std::vector<std::shared_ptr<Animation>> animations;

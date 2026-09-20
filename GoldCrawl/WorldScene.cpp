@@ -1,4 +1,5 @@
 #include "WorldScene.h"
+#include "AnimationManager.h"
 #include <format>
 #include "Color.h"
 
@@ -47,6 +48,7 @@ void WorldScene::update(Uint64 delta)
 		transitionScene->startFadeOut();
 		isFadingOutScene = true;
 	}
+	AnimationManager::only().update(delta);
 }
 
 void WorldScene::render(const Renderer& renderer) const
@@ -54,6 +56,7 @@ void WorldScene::render(const Renderer& renderer) const
 	renderMap(renderer);
 	renderPlayer(renderer);
 	renderToolbar(renderer);
+	AnimationManager::only().render(renderer, controller->getMapOffset());
 
 	if (isFadingOutScene || isFadingInScene)
 	{

@@ -24,10 +24,16 @@ void AnimationManager::update(Uint64 delta)
     }
 }
 
-void AnimationManager::render(const Renderer& renderer) const
+void AnimationManager::render(const Renderer& renderer, Vector mapOffset) const
 {
     for (auto& animation : animations)
     {
-        renderer.drawSprite(animation->animation->getSprite(), animation->bounds);
+        SDL_Rect bounds{
+            animation->bounds.x - mapOffset.x,
+            animation->bounds.y - mapOffset.y,
+            animation->bounds.w,
+            animation->bounds.h
+        };
+        renderer.drawSprite(animation->animation->getSprite(), bounds);
     }
 }

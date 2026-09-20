@@ -1,5 +1,4 @@
 #include "Director.h"
-#include "AnimationManager.h"
 
 Director::Director(std::unique_ptr<Scene> startingScene) : 
 	scene(std::move(startingScene)),
@@ -14,7 +13,6 @@ void Director::update()
 	lastTicks = now;
 
 	scene->update(delta);
-	AnimationManager::only().update(delta);
 }
 
 void Director::handleInput(Input& input)
@@ -25,6 +23,5 @@ void Director::handleInput(Input& input)
 void Director::render(const Renderer& renderer)
 {
 	scene->render(renderer);
-	AnimationManager::only().render(renderer);
 	renderer.render();
 }
