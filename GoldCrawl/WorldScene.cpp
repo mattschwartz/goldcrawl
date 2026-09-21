@@ -6,13 +6,14 @@
 #include "TiledImporter.h"
 
 WorldScene::WorldScene() :
+	showWelcome(true),
 	isFadingOutScene(false),
 	isFadingInScene(false)
 {
-	//std::string startingMap = "Maps/intro_dungeon.tmj";
+	std::string startingMap = "Maps/intro_dungeon.tmj";
 
 	//dbg
-	std::string startingMap = "Maps/dirty_dungeon_5.tmj";
+	//std::string startingMap = "Maps/dirty_dungeon_5.tmj";
 
 	auto& imp = TiledImporter::only();
 	auto starterMap = imp.parseTiledMap(startingMap);
@@ -30,6 +31,14 @@ WorldScene::WorldScene() :
 
 void WorldScene::handleInput(const Input& input)
 {
+	if (showWelcome)
+	{
+		if (input.isBindingPressed(KeyBinding::Start))
+		{
+			showWelcome = false;
+		}
+		return;
+	}
 	auto& gm = GameManager::only();
 	if (gm.isInDialog())
 	{
@@ -47,6 +56,8 @@ void WorldScene::handleInput(const Input& input)
 
 void WorldScene::update(Uint64 delta)
 {
+	if (showWelcome) return;
+
 	auto& gm = GameManager::only();
 	if (gm.isInDialog())
 	{
@@ -94,6 +105,13 @@ void WorldScene::update(Uint64 delta)
 
 void WorldScene::render(const Renderer& renderer) const
 {
+	if (showWelcome)
+	{
+		static auto welcomeSprite = Sprite{ "Sprites/title_card.png", SDL_Rect{0, 0, SCREEN_WIDTH, SCREEN_HEIGHT} };
+		renderer.drawSprite(welcomeSprite, SDL_Rect{ 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+		return;
+	}
+
 	renderMap(renderer);
 	renderPlayer(renderer);
 	renderToolbar(renderer);

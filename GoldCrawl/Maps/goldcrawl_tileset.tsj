@@ -753,7 +753,7 @@
                 {
                  "name":"upgrade_cost",
                  "type":"float",
-                 "value":1500
+                 "value":999
                 }, 
                 {
                  "name":"upgrade_name",

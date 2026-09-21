@@ -16,6 +16,7 @@ public:
 	void render(const Renderer& renderer) const override;
 
 private:
+	bool showWelcome;
 	bool isFadingOutScene;
 	bool isFadingInScene;
 	std::unique_ptr<WorldPlayerController> controller;
