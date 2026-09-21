@@ -81,7 +81,7 @@ void Renderer::drawSprite(const Sprite& sprite, SDL_Rect bounds) const
 		textureCache[cacheKey] = texture;
 		if (!texture)
 		{
-			SDL_LogError(0, "Sprite %s does not exist", sprite.filepath.c_str());
+			SDL_LogError(0, "Sprite %s does not exist: %s", sprite.filepath.c_str(), IMG_GetError());
 			return;
 		}
 	}

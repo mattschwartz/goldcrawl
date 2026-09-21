@@ -4,6 +4,7 @@
 #include <memory>
 #include <SDL.h>
 #include <unordered_map>
+#include <vector>
 #include "Sprite.h"
 
 struct SpriteFrame

@@ -30,8 +30,8 @@ void AnimationManager::render(const Renderer& renderer, Vector mapOffset) const
     for (auto& animation : animations)
     {
         SDL_Rect bounds{
-            animation->bounds.x - mapOffset.x,
-            animation->bounds.y - mapOffset.y,
+            (int)(animation->bounds.x - mapOffset.x),
+            (int)(animation->bounds.y - mapOffset.y),
             animation->bounds.w,
             animation->bounds.h
         };

@@ -77,7 +77,7 @@ void TiledImporter::parseTileLayer(const nlohmann::json& jLayer, Map& map, tiled
 				int tileId = chunk.data[i++];
 				if (tileId == 0) continue;
 				auto tt = tileset.getTile(tileId);
-				if (!tt) throw tiled::TiledError("no such tile for id " + tileId);
+				if (!tt) throw tiled::TiledError(std::format("no such tile for id {}", tileId));
 
 				std::shared_ptr<Tile> tile;
 

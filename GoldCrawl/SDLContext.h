@@ -8,7 +8,11 @@ namespace bacon
 	class SDLError : public std::exception
 	{
 	public:
-		SDLError(const std::string& msg) : std::exception(msg.c_str()) {}
+		SDLError(const std::string& msg) : _msg(msg) {}
+		virtual const char* what() const noexcept { return _msg.c_str(); }
+
+	private:
+		std::string _msg;
 	};
 
 	/// <summary>

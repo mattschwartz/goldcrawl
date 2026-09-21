@@ -13,9 +13,14 @@ namespace tiled
 	constexpr auto TILES_WIDTH = 10;
 	constexpr auto TILES_HEIGHT = 8;
 
-	struct TiledError : public std::exception
+	class TiledError : public std::exception
 	{
-		TiledError(const std::string& msg) : std::exception(msg.c_str()) {}
+	public:
+		TiledError(const std::string& msg) : _msg(msg) {}
+		virtual const char* what() const noexcept { return _msg.c_str(); }
+
+	private:
+		std::string _msg;
 	};
 
 	struct TileProperty

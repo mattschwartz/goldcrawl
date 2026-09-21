@@ -305,8 +305,8 @@ bool WorldPlayerController::enterPortal()
 		auto newMap = imp.parseTiledMap(portal->destinationMap);
 		auto spawnPoi = newMap->getPointOfInterest(portal->destinationPoi);
 		Vector newPosition{
-			spawnPoi->position.x - TILE_SIZE / 2,
-			spawnPoi->position.y - TILE_SIZE / 2
+			(float)(spawnPoi->position.x - TILE_SIZE / 2),
+			(float)(spawnPoi->position.y - TILE_SIZE / 2)
 		};
 
 		newPlayerPosition = newPosition;

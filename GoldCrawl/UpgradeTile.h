@@ -8,7 +8,7 @@ class UpgradeTile : public Tile
 public:
 	UpgradeTile(PlayerUpgrade upgrade, int upgradeCost) : upgrade(upgrade), upgradeCost(upgradeCost) {}
 
-	bool isInteractable() const { return true; }
+	bool isInteractable() const override { return true; }
 	void interact(class Player& player) override;
 
 private:
