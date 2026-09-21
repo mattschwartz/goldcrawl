@@ -387,7 +387,7 @@
                         {
                          "name":"spawn_poi",
                          "type":"string",
-                         "value":"entrance"
+                         "value":"exit"
                         }, 
                         {
                          "name":"type",
@@ -400,6 +400,54 @@
                  "width":9.4545,
                  "x":-5.63634090909091,
                  "y":32.3636368181818
+                }, 
+                {
+                 "height":0,
+                 "id":22,
+                 "name":"dialog",
+                 "opacity":1,
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog_text",
+                         "type":"string",
+                         "value":"Whew! There was a lot of loot inside this dungeon.;I left quite a mess, though, so it's a good thing you're here!;Hope you bought all your upgrades!"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"dialog"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":504.363636363636,
+                 "y":87.8181818181818
+                }, 
+                {
+                 "height":0,
+                 "id":23,
+                 "name":"hint dialog",
+                 "opacity":1,
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"dialog_text",
+                         "type":"string",
+                         "value":"Did you know you can  hold SELECT to highlight dirt?;That makes it easier  for you to clean, I reckon!"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"dialog"
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":119.818181818182,
+                 "y":233.090909090909
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -471,7 +519,7 @@
                     0, 0, 0, 71, 62, 62, 62, 64, 64, 58,
                     0, 0, 0, 71, 62, 62, 62, 64, 64, 58,
                     0, 0, 0, 62, 62, 62, 60, 61, 61, 59,
-                    0, 0, 0, 62, 62, 60, 61, 61, 61, 61,
+                    0, 65, 0, 62, 62, 60, 61, 61, 61, 61,
                     0, 0, 0, 62, 60, 61, 61, 61, 61, 61,
                     67, 67, 67, 60, 61, 61, 61, 61, 61, 61],
                  "height":8,
@@ -486,7 +534,7 @@
                     13, 0, 0, 0, 0, 0, 0, 0, 0, 13,
                     13, 0, 32, 0, 0, 0, 0, 0, 0, 13,
                     13, 0, 0, 0, 0, 0, 0, 0, 0, 13,
-                    13, 0, 0, 0, 0, 0, 0, 0, 22, 13,
+                    13, 0, 0, 0, 0, 0, 0, 65, 22, 13,
                     13, 13, 13, 13, 13, 13, 13, 13, 13, 13],
                  "height":8,
                  "width":10,
@@ -506,7 +554,7 @@
          "y":0
         }],
  "nextlayerid":5,
- "nextobjectid":22,
+ "nextobjectid":24,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.12.1",

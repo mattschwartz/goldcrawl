@@ -80,7 +80,7 @@ void ShopController::render(const Renderer& renderer) const
 		renderer.drawText("[Double clean radius]", 5, 61, colors::base);
 		break;
 	case PlayerUpgrade::DoubleCleanliness:
-		renderer.drawText("[Double clean damage]", 5, 61, colors::base);
+		renderer.drawText("[Double clean amount]", 5, 61, colors::base);
 		break;
 	case PlayerUpgrade::DoubleCleanSpeed:
 		renderer.drawText("[Faster clean speed]", 5, 61, colors::base);

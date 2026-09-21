@@ -122,7 +122,7 @@
                         {
                          "name":"dialog_text",
                          "type":"string",
-                         "value":"Hi there, young adventurer! Why don't you go clean some dungeons for me?;You can press 'B' to sweep up the grime!;Thanks!"
+                         "value":"This land is filled with dungeons, which brings adventurers from  all over.;But they leave such a mess when they're done looting!;That's why I hired you. Can you clean up after them?;Adventurers don't pay to crawl a filthy dungeon!"
                         }, 
                         {
                          "name":"type",
