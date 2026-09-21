@@ -77,7 +77,7 @@ void WorldPlayerController::handleInput(const Input& input)
 			getMap()->setFinishedCleaning(true);
 			winAnimation = AnimationManager::only().addOneShot("Sprites/clean_animation.json",
 				SDL_Rect{ (int)mapOffset.x, (int)mapOffset.y, SCREEN_WIDTH, SCREEN_HEIGHT });
-			GameManager::only().addGold((int)(getMap()->getTotalDirtLevel() / 200.f));
+			GameManager::only().addGold((int)(getMap()->getTotalDirtLevel() / 20.f));
 		}
 	}
 	if (input.isBindingPressed(KeyBinding::A))
@@ -94,7 +94,7 @@ void WorldPlayerController::handleInput(const Input& input)
 					getMap()->setFinishedCleaning(true);
 					winAnimation = AnimationManager::only().addOneShot("Sprites/clean_animation.json",
 						SDL_Rect{ (int)mapOffset.x, (int)mapOffset.y, SCREEN_WIDTH, SCREEN_HEIGHT });
-					GameManager::only().addGold((int)(getMap()->getTotalDirtLevel() / 200.f));
+					GameManager::only().addGold((int)(getMap()->getTotalDirtLevel() / 20.f));
 				}
 			}
 		}
