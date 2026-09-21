@@ -5,14 +5,14 @@ constexpr int DURATION_MILLIS = 333;
 
 void MapTransitionScene::startFadeIn()
 {
-	opacity = 0;
+	opacity = 1;
 	remainingDurationMillis = DURATION_MILLIS;
 	fade = FadeDirection::In;
 }
 
 void MapTransitionScene::startFadeOut()
 {
-	opacity = 1;
+	opacity = 0;
 	remainingDurationMillis = DURATION_MILLIS;
 	fade = FadeDirection::Out;
 }
@@ -43,11 +43,12 @@ void MapTransitionScene::render(const Renderer& renderer) const
 {
 	if (remainingDurationMillis <= 0) return;
 
+	auto a = (Uint8)(opacity * 255);
 	SDL_Color color{
 		colors::highlight.r,
 		colors::highlight.g,
 		colors::highlight.b,
-		(Uint8)(opacity * 255)
+		a
 	};
 	renderer.drawBox({ 0,0,SCREEN_WIDTH,SCREEN_HEIGHT }, color, true);
 }
